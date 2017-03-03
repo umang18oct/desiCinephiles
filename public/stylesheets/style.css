@@ -1,0 +1,13 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #00B7FF;
+}
+.nav-tabs {
+  padding: 0 5vw;
+}
+#home-carousel{
+  height: 300px!important;
+  min-height: 300px!important;
+}
