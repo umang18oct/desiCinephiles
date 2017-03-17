@@ -11,5 +11,8 @@ router.get('/about', function(req, res, next) {
 router.get('/movies', function(req, res, next) {
   res.render('movie', { title: 'Movies - desiCinephiles' });
 });
+router.get('/tvshows', function(req, res, next) {
+  res.render('tvshows', { title: 'TV Shows - desiCinephiles' });
+});
 
 module.exports = router;

@@ -8,7 +8,7 @@ a {
   margin: 0 2vw;
 }
 .container{
-  width: 80vw;
+  width: 70vw;
   padding: 0!important;
 }
 @import url(http://weloveiconfonts.com/api/?family=entypo);
@@ -128,3 +128,34 @@ ul {
 {
 	background-color: #000000;
 }
+#contact{
+  background-color: black;
+}
+
+  /* label color */
+   .input-field label {
+     color: #000;
+   }
+   /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: #000;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   /* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   /* invalid color */
+   .input-field input[type=text].invalid {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: #000;
+   }
