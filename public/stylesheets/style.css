@@ -128,8 +128,11 @@ ul {
 {
 	background-color: #000000;
 }
-#contact{
-  background-color: black;
+
+.input-field label:not(.label-icon).active {
+    font-size: .8rem;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
   /* label color */
@@ -147,15 +150,21 @@ ul {
    }
    /* valid color */
    .input-field input[type=text].valid {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
+     border-bottom: 1px solid green;
+     box-shadow: 0 1px 0 0 green;
    }
    /* invalid color */
    .input-field input[type=text].invalid {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
+     border-bottom: 1px solid red;
+     box-shadow: 0 1px 0 0 red;
    }
    /* icon prefix focus color */
-   .input-field .prefix.active {
+   .input-field .prefix {
      color: #000;
    }
+   input, textarea{
+     color: black;
+   }
+   .input-field label {
+    margin-left: 1rem;
+}
