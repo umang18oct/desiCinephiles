@@ -24,11 +24,6 @@
           <li class="nav-tabs"><a href="/tvshows"><b>TV SHOWS</b></a></li>
           <li class="nav-tabs"><a href="/tvshows"><b>CONTACT US</b></a></li>
           <li class="nav-tabs"><a><b>LOGIN / SIGN UP</b></a></li>
-          <!-- <li class="nav-tabs" id="primary_social">
-                <a href="http://www.facebook.com/Metacritic" target="_blank"><i class="fa fa-facebook"></i></a>
-                <a href="http://twitter.com/metacritic" target="_blank"><i class="fa fa-twitter"></i></a>
-                <a href="http://instagram.com/metacritic" target="_blank"><i class="fa fa-instagram"></i></a>
-          </li> -->
         </ul>
         <ul class="side-nav" id="mobile-demo">
           <li class="nav-tabs"><a href="/"><b>HOME</b></a></li>
@@ -47,6 +42,57 @@
         <li><a href="#" class="entypo-instagrem" target="_blank"><i class="fa fa-instagram"></i><span>Instagram</span></a></li>
     </ul>
   </aside>
+  <div id="modal1" class="modal modal-fixed-footer">
+      <div class="modal-content" id="contact">
+        <h4>Contact Us</h4>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="fName" type="text" class="validate">
+                <label for="fName">First Name</label>
+              </div>
+              <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="lName" type="text" class="validate">
+                <label for="lName">Last Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">email</i>
+                <input id="email" type="email" class="validate">
+                <label for="email">Email</label>
+              </div>
+              <div class="input-field col s6">
+                <i class="material-icons prefix">phone</i>
+                <input id="mobileNo" type="number" class="validate">
+                <label for="mobileNo">Telephone</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">email</i>
+                <input id="subject" type="text" class="validate">
+                <label for="subject">Subject</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">email</i>
+                <textarea id="message" class="materialize-textarea"></textarea>
+                <label for="message">Textarea</label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">SUBMIT</a>
+      </div>
+  </div>
+
   <br>
   <div class="container">
     <div class="row">
@@ -279,6 +325,7 @@
     <script>
       $(document).ready(function(){
         $(".button-collapse").sideNav();
+        $('.modal').modal();
       });
     </script>
   </body>

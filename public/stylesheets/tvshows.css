@@ -1,0 +1,8 @@
+#tvShows{
+    margin-top: -10vh;
+    padding: 0;
+}
+#tvShows a img{
+  height: 150%;
+  width: 125%;
+}

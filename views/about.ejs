@@ -42,6 +42,57 @@
         <li><a href="#" class="entypo-instagrem" target="_blank"><i class="fa fa-instagram"></i><span>Instagram</span></a></li>
       </ul>
     </aside>
+    <div id="modal1" class="modal modal-fixed-footer">
+        <div class="modal-content" id="contact">
+          <h4>Contact Us</h4>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s6">
+                  <i class="material-icons prefix">account_circle</i>
+                  <input id="fName" type="text" class="validate">
+                  <label for="fName">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                  <i class="material-icons prefix">account_circle</i>
+                  <input id="lName" type="text" class="validate">
+                  <label for="lName">Last Name</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s6">
+                  <i class="material-icons prefix">email</i>
+                  <input id="email" type="email" class="validate">
+                  <label for="email">Email</label>
+                </div>
+                <div class="input-field col s6">
+                  <i class="material-icons prefix">phone</i>
+                  <input id="mobileNo" type="number" class="validate">
+                  <label for="mobileNo">Telephone</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">email</i>
+                  <input id="subject" type="text" class="validate">
+                  <label for="subject">Subject</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">email</i>
+                  <textarea id="message" class="materialize-textarea"></textarea>
+                  <label for="message">Textarea</label>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">SUBMIT</a>
+        </div>
+    </div>
+
     <br>
     <div class="container">
       <center>
@@ -60,10 +111,10 @@
         <h5>Loream impsum ipsum lor sbkc a Lorea  Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.
             Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.  Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a. Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a. Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.
         </h5>
-        <h4> A short film by .. . . </h4>
+        <!-- <h4> A short film by .. . . </h4>
         <div class="video-container">
           <iframe src="//www.youtube.com/embed/Q8TXgCzxEnw?rel=0" frameborder="0" allowfullscreen></iframe>
-        </div>
+        </div> -->
       </center>
     </div>
     <footer class="page-footer">
@@ -97,6 +148,7 @@
     <script>
       $(document).ready(function(){
         $(".button-collapse").sideNav();
+        $('.modal').modal();
       });
     </script>
   </body>
