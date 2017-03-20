@@ -131,8 +131,8 @@ ul {
 
 .input-field label:not(.label-icon).active {
     font-size: .8rem;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+    -webkit-transform: translateY(-80%);
+    transform: translateY(-80%);
 }
 
   /* label color */
