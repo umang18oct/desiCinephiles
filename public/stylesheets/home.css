@@ -1,4 +1,5 @@
 #home-carousel{
+  margin-top: 8vh !important;
   height: 300px!important;
   min-height: 300px!important;
 }

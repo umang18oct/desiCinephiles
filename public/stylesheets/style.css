@@ -4,6 +4,9 @@ body {
 a {
   color: #00B7FF;
 }
+nav{
+  background-color: #333;
+}
 .nav-tabs {
   margin: 0 2vw;
 }
@@ -167,4 +170,13 @@ ul {
    }
    .input-field label {
     margin-left: 1rem;
+}
+.modal.modal-fixed-footer .modal-content {
+    background-color: #ddd;
+}
+.modal.modal-fixed-footer .modal-footer {
+    background-color: #999;
+  }
+footer.page-footer {
+    background-color: grey;
 }
