@@ -91,9 +91,9 @@
   <div class="container">
     <h2 class="center"> MOVIES </h2>
     <div class="row">
-      <div class="col s12 m12 l4 movieTab scrollbar style-3">
-        <h4>LATEST <i class="small material-icons">new_releases</i></h4>
-        <br>
+      <div class="col s12 m12 l4">
+        <h4 class="center-align">LATEST <i class="small material-icons">new_releases</i></h4>
+        <div class=" movieTab scrollbar style-3">
         <div class="card horizontal">
           <div class="card-image">
             <img src="https://lorempixel.com/100/190/nature/6">
@@ -161,9 +161,10 @@
         </div>
         <p><a>LOAD MORE</a></p>
       </div>
-      <div class="col s12 m12 l4 movieTab scrollbar style-3">
-        <h4>HIGHLY RATED <i class="small material-icons">verified_user</i></h4>
-        <br>
+    </div>
+    <div class="col s12 m12 l4">
+        <h4 class="center-align">HIGHLY RATED <i class="small material-icons">verified_user</i></h4>
+      <div class=" movieTab scrollbar style-3">
         <div class="card horizontal">
           <div class="card-image">
             <img src="https://lorempixel.com/100/190/nature/6">
@@ -218,9 +219,10 @@
         </div>
         <p><a>LOAD MORE</a></p>
       </div>
-      <div class="col s12 m12 l4 movieTab scrollbar style-3">
-        <h4>TRENDING  <i class="small material-icons">trending_up</i></h4>
-        <br>
+      </div>
+      <div class="col s12 m12 l4">
+        <h4 id="trendHead" class="center-align">TRENDING  <i class="small material-icons">trending_up</i></h4>
+        <div class=" movieTab scrollbar style-3">
         <div class="card horizontal">
           <div class="card-image">
             <img src="https://lorempixel.com/100/190/nature/6">
@@ -289,6 +291,7 @@
       </div>
     </div>
   </div>
+</div>
 
   <footer class="page-footer">
       <div class="container">
@@ -331,6 +334,14 @@
       $(document).ready(function(){
         $(".button-collapse").sideNav();
         $('.modal').modal();
+        // var elementPosition = $('#treadHead').offset();
+        // $(window).scroll(function(){
+        // if($(window).scrollTop() > elementPosition.top){
+        //       $('#treadHead').css('position','fixed').css('top','0');
+        // } else {
+        //     $('#treadHead').css('position','static');
+        // }
+        // });
       });
     </script>
   </body>

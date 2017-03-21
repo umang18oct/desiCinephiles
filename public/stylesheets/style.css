@@ -5,7 +5,7 @@ a {
   color: #00B7FF;
 }
 nav{
-  background-color: #333;
+  background-color: black;
 }
 .nav-tabs {
   margin: 0 2vw;
@@ -178,5 +178,5 @@ ul {
     background-color: #999;
   }
 footer.page-footer {
-    background-color: grey;
-}
+      background-color: #111;
+  }
