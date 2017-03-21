@@ -43,7 +43,7 @@ app.use('/users', users);
 // passport.deserializeUser(User.deserializeUser());
 
 // mongoose
-mongoose.connect('mongodb://umang18oct:umang18oct@ds137370.mlab.com:37370/desicinephiles');
+// mongoose.connect('mongodb://umang18oct:umang18oct@ds137370.mlab.com:37370/desicinephiles');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

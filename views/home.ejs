@@ -35,6 +35,25 @@
         </ul>
       </div>
     </nav>
+  <!-- Modal Structure -->
+  <div id="modal2" class="modal">
+    <div class="modal-content cover">
+      <h2> Why DesiCinephiles? </h2>
+      <p>At first glance, it would seem like we aren’t doing anything new. This could be another
+        site giving you our weekly dose of movie reviews which could help you decide what would
+        you spend your weekend watching. This website would definitely do that, provide an easily
+        digestible meal which would satiate those who see films and television as a source of
+        entertainment, which they essentially are. But rather than being a one sided exercise,
+        what we want to do here is to establish a discourse, with those who live and breath,
+        cinema and television. It would be an attempt to engage like minded people in a
+        discussion which works on one assumption, that cinema is a form of art, those which draw
+        inspiration from all other, and thus they warrant a discussion which is, for the lack of
+        a better word,  profound.
+         <br><br>
+         We might fail in our attempts but we promise to keep trying. We are the DesiCinephiles. </p>
+    </div>
+  </div>
+    <div class="home">
     <aside id="sticky-social">
       <ul>
           <li><a href="#" class="entypo-facebook" target="_blank"><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
@@ -88,6 +107,7 @@
         </div>
     </div>
     <div class="container">
+      <!-- <a class="waves-effect waves-light btn" href="#modal2">View Cover</a> -->
     <div class="carousel carousel-slider center" data-indicators="true" id="home-carousel">
       <div class="carousel-item red white-text" href="#one!">
         <h2>First Panel</h2>
@@ -111,25 +131,6 @@
       </div>
     </div>
     <div class="row">
-      <div class="col s12 m12 l12">
-        <br>
-        <h4 class="header">WHY desiCinephiles?</h4>
-        <div class="card-panel teal hoverable">
-          <span class="white-text">At first glance, it would seem like we aren’t doing anything new.
-            This could be another site giving you our weekly dose of movie reviews which could help
-            you decide what would you spend your weekend watching. This website would definitely do
-            that, provide an easily digestible meal which would satiate those who see films and
-            television as a source of entertainment, which they essentially are. But rather than
-            being a one sided exercise, what we want to do here is to establish a discourse,
-            with those who live and breath, cinema and television. It would be an attempt to
-            engage like minded people in a discussion which works on one assumption, that cinema
-            is a form of art, those which draw inspiration from all other, and thus they warrant
-             a discussion which is, for the lack of a better word,  profound.
-             <br><br>
-             We might fail in our attempts but we promise to keep trying. We are the DesiCinephiles. 
-          </span>
-        </div>
-      </div>
     </div>
   </div>
   <footer class="page-footer">
@@ -166,6 +167,7 @@
         </div>
       </div>
     </footer>
+  </div>
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
@@ -173,6 +175,9 @@
       $(document).ready(function(){
         $(".button-collapse").sideNav();
         $('.modal').modal();
+        setTimeout(function(){
+          $('#modal2').modal('open');
+          }, 2000);
         $('.carousel.carousel-slider').carousel({fullWidth: true,duration: 300});
         autoplay();
         function autoplay() {

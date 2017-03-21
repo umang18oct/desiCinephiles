@@ -9,6 +9,7 @@ var TvShow = new Schema({
     post: String,
     postImages: [String],
     rating: Number,
-    shouldWatch: String
+    shouldWatch: String,
+    lastAiredEpisodeDate: {type: Date}
 });
 module.exports = mongoose.model('TvShow', TvShow);

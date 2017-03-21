@@ -9,6 +9,8 @@ var Movie = new Schema({
     post: String,
     postImages: [String],
     rating: Number,
-    shouldWatch: String
+    shouldWatch: String,
+    director: String,
+    releaseData: {type: Date}
 });
 module.exports = mongoose.model('Movie', Movie);
