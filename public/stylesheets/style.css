@@ -14,7 +14,7 @@ nav{
   width: 70vw;
   padding: 0!important;
 }
-@import url(http://weloveiconfonts.com/api/?family=entypo);
+@import url(https://weloveiconfonts.com/api/?family=entypo);
 
 /* entypo */
 [class*="entypo-"]:before {
