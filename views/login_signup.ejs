@@ -4,14 +4,15 @@
     <title><%= title %></title>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="/stylesheets/materialize.min.css"  media="screen,projection"/>
     <!--Mobile optimization-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/about.css' />
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+    <link rel="stylesheet" href="/stylesheets/login_signup.css">
   </head>
   <body>
     <nav>
@@ -88,32 +89,93 @@
           <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">SUBMIT</a>
         </div>
     </div>
-
     <br>
     <div class="container">
-      <center>
-        <img src="/images/1.jpg" class="circle responsive-img hoverable" alt="" id="criticPic">
-        <h5>Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream imp  Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.
-            Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.
-            Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.
-            sum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.
-        </h5>
-        <h5>Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.
-        </h5>
-        <h5>Loream impsum ipsum lor sbkc a Loream imp  Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.
-            Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.
-            sum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.
-        </h5>
-        <h5>Loream impsum ipsum lor sbkc a Lorea  Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.
-            Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.  Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a. Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a. Loream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a Loream impsum ipsum lor sbkc aLoream impsum ipsum lor sbkc a.
-        </h5>
-        <!-- <h4> A short film by .. . . </h4>
-        <div class="video-container">
-          <iframe src="//www.youtube.com/embed/Q8TXgCzxEnw?rel=0" frameborder="0" allowfullscreen></iframe>
-        </div> -->
-      </center>
-    </div>
+      <div class="form">
+      <ul class="tab-group">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+      </ul>
+        <div class="tab-content">
+        <div id="signup">
+          <h1>Sign Up</h1>
+          <form action="/register" method="post">
+         <!-- <div class="field-wrap">
+             <select class="select-btn" id="sign" onchange="signuptype()" name="userType">
+            <option value="User" selected> User</option>
+            <option value="Admin"> Admin</option>
+              </select>
+            </div> -->
+              <div class="top-row">
+            <div class="field-wrap">
+              <label>
+                First Name<span class="req">*</span>
+              </label>
+              <input type="text" required autocomplete="off" name="fname"/>
+            </div>
+            <div class="field-wrap">
+              <label>
+                Last Name<span class="req">*</span>
+              </label>
+              <input type="text" required autocomplete="off" name="lname"/>
+            </div>
+          </div>
+           <div class="top-row">
+          <div class="field-wrap">
+            <label>
+              ID<span class="req">*</span>
+            </label>
+            <input type="text" required name="id"/>
+          </div>
+          <div class="field-wrap">
+            <label>
+              MOBILE NUMBER<span class="req">*</span>
+            </label>
+            <input type="number" required autocomplete="off" onblur="mob_ckeck()" id="mobile" name="mobNo"/>
+          </div>
+          </div>
+           <div class="top-row">
+          <div class="field-wrap">
+            <label>
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="email" required autocomplete="off" name="email"/>
+          </div>
+          <div class="field-wrap">
+            <label>
+              Set A Password<span class="req">*</span>
+            </label>
+            <input type="password" required autocomplete="off" name="password"/>
+          </div>
+          </div>
+          <span id="war2">
+        </span>
+          <button type="submit" class="button button-block"/>Get Started</button>
+          </form>
+        </div>
+        <div id="login">
+          <h1>Welcome Back!</h1>
+          <form action="/login" method="post">
+            <div class="field-wrap">
+            <label>
+              ID<span class="req">*</span>
+            </label>
+            <input type="text"required autocomplete="off" name="id"/>
+          </div>
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input type="password"required autocomplete="off" name="password"/>
+          </div>
 
+          <p class="forgot"><a href="#">Forgot Password?</a></p>
+          <button class="button button-block"/>Log In</button>
+          </form>
+        </div>
+      </div><!-- tab-content -->
+</div> <!-- /form -->
+    </div>
     <footer class="page-footer">
         <div class="container">
           <div class="row">
@@ -151,6 +213,7 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
+        <script type="text/javascript" src="/javascripts/login_signup.js"></script>
     <script>
       $(document).ready(function(){
         $(".button-collapse").sideNav();

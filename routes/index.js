@@ -29,5 +29,8 @@ router.get('/movies', function(req, res, next) {
 router.get('/tvshows', function(req, res, next) {
   res.render('tvshows', { title: 'TV Shows - desiCinephiles' });
 });
+router.get('/login', function(req, res, next) {
+  res.render('login_signup', { title: 'Login / SignUp - desiCinephiles' });
+});
 
 module.exports = router;
