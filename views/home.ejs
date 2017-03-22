@@ -58,6 +58,7 @@
        </div>
     </div>
   </div>
+  <div id="main">
     <aside id="sticky-social">
       <ul>
           <li><a href="#" class="entypo-facebook" target="_blank"><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
@@ -231,6 +232,7 @@
       </div>
     </div>
   </div>
+</div>
   <footer class="page-footer">
       <div class="container">
         <div class="row">
@@ -271,10 +273,27 @@
     <script>
       $(document).ready(function(){
         $(".button-collapse").sideNav();
-        $('.modal').modal();
         setTimeout(function(){
           $('#modal2').modal('open');
           }, 2000);
+        $('#modal2').modal({
+            dismissible: true, // Modal can be dismissed by clicking outside of the modal
+            opacity: .5, // Opacity of modal background
+            inDuration: 300, // Transition in duration
+            outDuration: 200, // Transition out duration
+            ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+              $('#main').css('-webkit-filter','blur(10px)');
+              $('#main').css('-moz-filter','blur(10px)');
+              $('#main').css('filter','blur(10px)');
+              // $('body').css('background-color', 'cyan');
+            },
+            complete: function() {
+              $('#main').css('-webkit-filter','blur(0px)');
+              $('#main').css('-moz-filter','blur(0px)');
+              $('#main').css('filter','blur(0px)');
+            } // Callback for Modal close
+        });
+        $('.modal').modal();
         $('.carousel.carousel-slider').carousel({fullWidth: true,duration: 300});
         autoplay();
         function autoplay() {

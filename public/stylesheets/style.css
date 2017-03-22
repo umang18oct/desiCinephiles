@@ -7,6 +7,10 @@ a {
 nav{
   background-color: black;
 }
+.nav-wrapper ul li a:hover{
+  background-color: white;
+  color: black !important;
+}
 .nav-tabs {
   margin: 0 2vw;
 }
