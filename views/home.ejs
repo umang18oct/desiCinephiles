@@ -58,6 +58,51 @@
        </div>
     </div>
   </div>
+  <div id="modal1" class="modal modal-fixed-footer">
+      <div class="modal-content" id="contact">
+        <h4>Contact Us</h4>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="name" type="text" class="validate">
+                <label for="name">Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 m6 l6">
+                <i class="material-icons prefix">email</i>
+                <input id="email" type="email" class="validate">
+                <label for="email">Email</label>
+              </div>
+              <div class="input-field col s12 m6 l6">
+                <i class="material-icons prefix">phone</i>
+                <input id="mobileNo" type="number" class="validate">
+                <label for="mobileNo">Telephone</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">email</i>
+                <input id="subject" type="text" class="validate">
+                <label for="subject">Subject</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">email</i>
+                <textarea id="message" class="materialize-textarea"></textarea>
+                <label for="message">Textarea</label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">SUBMIT</a>
+      </div>
+  </div>
   <div id="main">
     <aside id="sticky-social">
       <ul>
@@ -66,51 +111,6 @@
           <li><a href="#" class="entypo-instagrem" target="_blank"><i class="fa fa-instagram"></i><span>Instagram</span></a></li>
         </ul>
     </aside>
-    <div id="modal1" class="modal modal-fixed-footer">
-        <div class="modal-content" id="contact">
-          <h4>Contact Us</h4>
-          <div class="row">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <i class="material-icons prefix">account_circle</i>
-                  <input id="name" type="text" class="validate">
-                  <label for="name">Name</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12 m6 l6">
-                  <i class="material-icons prefix">email</i>
-                  <input id="email" type="email" class="validate">
-                  <label for="email">Email</label>
-                </div>
-                <div class="input-field col s12 m6 l6">
-                  <i class="material-icons prefix">phone</i>
-                  <input id="mobileNo" type="number" class="validate">
-                  <label for="mobileNo">Telephone</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <i class="material-icons prefix">email</i>
-                  <input id="subject" type="text" class="validate">
-                  <label for="subject">Subject</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s12">
-                  <i class="material-icons prefix">email</i>
-                  <textarea id="message" class="materialize-textarea"></textarea>
-                  <label for="message">Textarea</label>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">SUBMIT</a>
-        </div>
-    </div>
     <div class="container">
       <!-- <a class="waves-effect waves-light btn" href="#modal2">View Cover</a> -->
     <div class="carousel carousel-slider center" data-indicators="true" id="home-carousel">
@@ -277,23 +277,23 @@
           $('#modal2').modal('open');
           }, 2000);
         $('#modal2').modal({
-            dismissible: true, // Modal can be dismissed by clicking outside of the modal
-            opacity: .5, // Opacity of modal background
-            inDuration: 300, // Transition in duration
-            outDuration: 200, // Transition out duration
-            ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-              $('#main').css('-webkit-filter','blur(10px)');
-              $('#main').css('-moz-filter','blur(10px)');
-              $('#main').css('filter','blur(10px)');
-              // $('body').css('background-color', 'cyan');
-            },
-            complete: function() {
-              $('#main').css('-webkit-filter','blur(0px)');
-              $('#main').css('-moz-filter','blur(0px)');
-              $('#main').css('filter','blur(0px)');
-            } // Callback for Modal close
+          dismissible: true, // Modal can be dismissed by clicking outside of the modal
+          opacity: .2, // Opacity of modal background
+          inDuration: 300, // Transition in duration
+          outDuration: 200, // Transition out duration
+          ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+            $('#main').css('-webkit-filter','blur(10px)');
+            $('#main').css('-moz-filter','blur(10px)');
+            $('#main').css('filter','blur(10px)');
+            // $('body').css('background-color', 'cyan');
+          },
+          complete: function() {
+            $('#main').css('-webkit-filter','blur(0px)');
+            $('#main').css('-moz-filter','blur(0px)');
+            $('#main').css('filter','blur(0px)');
+          } // Callback for Modal close
         });
-        $('.modal').modal();
+        $('#modal1').modal();
         $('.carousel.carousel-slider').carousel({fullWidth: true,duration: 300});
         autoplay();
         function autoplay() {
