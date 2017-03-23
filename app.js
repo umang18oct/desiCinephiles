@@ -37,13 +37,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
-// var User = require('./models/user');
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+var Admin = require('./models/admin');
+passport.use(new LocalStrategy(Admin.authenticate()));
+passport.serializeUser(Admin.serializeUser());
+passport.deserializeUser(Admin.deserializeUser());
 
 // mongoose
-// mongoose.connect('mongodb://umang18oct:umang18oct@ds137370.mlab.com:37370/desicinephiles');
+mongoose.connect('mongodb://umang18oct:umang18oct@ds137370.mlab.com:37370/desicinephiles');
+//mongoose.connect('mongodb://127.0.0.1/desicinephiles');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

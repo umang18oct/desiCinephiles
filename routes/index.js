@@ -33,4 +33,58 @@ router.get('/login', function(req, res, next) {
   res.render('login_signup', { title: 'Login / SignUp - desiCinephiles' });
 });
 
+router.post('/register', function(req, res) {
+    req.body.username = req.body.id;
+    Admin.register(new Admin({ email : req.body.email,fname : req.body.fname,lname : req.body.lname, username : req.body.id, mobNo : req.body.mobNo
+    }), req.body.password, function(err, admin) {
+        if (err) {
+          console.log(err);
+            return res.render('login_signup', { admin : admin });
+        }
+        passport.authenticate('local')(req, res, function () {
+            res.redirect('/admin');
+        });
+    });
+});
+
+router.post('/login',function(req,res,next){
+  console.log(req.body.id);
+  req.body.username = req.body.id;
+  next();
+} ,passport.authenticate('local'), function(req, res) {
+    res.redirect('/admin');
+});
+
+router.get('/admin', function(req, res, next) {
+  res.render('admin', { title: 'Admin Panel - desiCinephiles', admin:req.admin });
+});
+
+router.get('/review/:postid', function(req, res, next) {
+  var id = req.params.postid;
+  console.log(id);
+  res.render('review', { title: 'Review - desiCinephiles' });
+});
+
+router.post('/admin', m.authenticatedOnly, function(req, res) {
+  var movie = new Movie({
+    mName: req.body.mName,
+    director: req.body.director,
+    postDate : new Date(),
+    post: req.body.post,
+    rating: req.body.rating,
+    shouldWatch: req.body.shouldWatch,
+    horPoster: req.body.horPoster,
+    verPoster: req.body.verPoster,
+    releaseDate: req.body.releaseDate,
+    id: req.body.id,
+    author : req.admin
+  });
+  movie.save(function(err){
+    if(err){
+      console.log("ERROR : ",err);
+    }else{
+      return res.redirect("/admin");
+    }
+  });
+});
 module.exports = router;
