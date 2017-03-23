@@ -1,6 +1,6 @@
 /**
  * Super simple wysiwyg editor v0.8.2
- * http://summernote.org/
+ * https://summernote.org/
  *
  * summernote.js
  * Copyright 2013-2016 Alan Hong. and other contributors
@@ -93,8 +93,8 @@
     /**
      * returns bnd (bounds) from rect
      *
-     * - IE Compatibility Issue: http://goo.gl/sRLOAo
-     * - Scroll Issue: http://goo.gl/sNjUc
+     * - IE Compatibility Issue: https://goo.gl/sRLOAo
+     * - Scroll Issue: https://goo.gl/sNjUc
      *
      * @param {Rect} rect
      * @return {Object} bounds
@@ -542,7 +542,7 @@
 
     /**
      * ex) br, col, embed, hr, img, input, ...
-     * @see http://www.w3.org/html/wg/drafts/html/master/syntax.html#void-elements
+     * @see https://www.w3.org/html/wg/drafts/html/master/syntax.html#void-elements
      */
     var isVoid = function (node) {
       return node && /^BR|^IMG|^HR|^IFRAME|^BUTTON/.test(node.nodeName.toUpperCase());
@@ -2303,7 +2303,7 @@
      * @param {Boolean} isStart
      * @return {BoundaryPoint}
      *
-     * @see http://msdn.microsoft.com/en-us/library/ie/ms535872(v=vs.85).aspx
+     * @see https://msdn.microsoft.com/en-us/library/ie/ms535872(v=vs.85).aspx
      */
     var textRangeToPoint = function (textRange, isStart) {
       var container = textRange.parentElement(), offset;
@@ -2925,7 +2925,7 @@
    *  * BoundaryPoint: a point of dom tree
    *  * BoundaryPoints: two boundaryPoints corresponding to the start and the end of the Range
    *
-   * See to http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#Level-2-Range-Position
+   * See to https://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#Level-2-Range-Position
    *
    * @singleton
    * @alternateClassName range
@@ -4340,9 +4340,9 @@
       }
 
       $.each(anchors, function (idx, anchor) {
-        // if url doesn't match an URL schema, set http:// as default
+        // if url doesn't match an URL schema, set https:// as default
         linkUrl = /^[A-Za-z][A-Za-z0-9+-.]*\:[\/\/]?/.test(linkUrl) ?
-          linkUrl : 'http://' + linkUrl;
+          linkUrl : 'https://' + linkUrl;
 
         $(anchor).attr('href', linkUrl);
         if (isNewWindow) {
@@ -5023,7 +5023,7 @@
 
   var AutoLink = function (context) {
     var self = this;
-    var defaultScheme = 'http://';
+    var defaultScheme = 'https://';
     var linkPattern = /^([A-Za-z][A-Za-z0-9+-.]*\:[\/\/]?|mailto:[A-Z0-9._%+-]+@)?(www\.)?(.+)$/i;
 
     this.events = {
@@ -5897,7 +5897,7 @@
                  '</div>' +
                  '<div class="form-group">' +
                    '<label>' + lang.link.url + '</label>' +
-                   '<input class="note-link-url form-control" type="text" value="http://" />' +
+                   '<input class="note-link-url form-control" type="text" value="https://" />' +
                  '</div>' +
                  (!options.disableLinkTarget ?
                    '<div class="checkbox">' +
@@ -6461,7 +6461,7 @@
 
       var body = [
         '<p class="text-center">',
-        '<a href="http://summernote.org/" target="_blank">Summernote 0.8.2</a> · ',
+        '<a href="https://summernote.org/" target="_blank">Summernote 0.8.2</a> · ',
         '<a href="https://github.com/summernote/summernote" target="_blank">Project</a> · ',
         '<a href="https://github.com/summernote/summernote/issues" target="_blank">Issues</a>',
         '</p>'
