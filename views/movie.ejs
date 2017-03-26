@@ -47,7 +47,7 @@
       <div class="modal-content" id="contact">
         <h4>Contact Us</h4>
         <div class="row">
-          <form class="col s12">
+          <form class="col s12" action="/contact" method="post">
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
@@ -93,207 +93,73 @@
     <h2 class="center"> MOVIES </h2>
     <div class="row">
       <div class="col s12 m12 l4">
-        <h4 class="center-align">LATEST <i class="small material-icons">new_releases</i></h4>
-        <div class=" movieTab scrollbar style-3">
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
+        <h4 class="tabHeaders center-align">LATEST <i class="small material-icons">new_releases</i></h4>
+        <div class="movieTab scrollbar style-3">
+          <% for(var i=0;i<5;i++){var movie = recentMovies[i];if(!movie)continue; %>
+            <div class="card horizontal">
+              <div class="card-image">
+                <img src='uploads/<%=movie.verPoster%>'>
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
+                  <p><%= movie.oneLiner %></p>
+                  <p><b>Released on : </b><%= movie.releaseDate.toString().substring(0,15) %></p>
+                </div>
+                <div class="card-action">
+                  <a href="/review/<%= movie.type %>/<%= movie.id %>">Read More </a>
+                </div>
+              </div>
             </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <p><a>LOAD MORE</a></p>
+          <% } %>
+        <p><a href="#">LOAD MORE</a></p>
       </div>
     </div>
     <div class="col s12 m12 l4">
-        <h4 class="center-align">HIGHLY RATED <i class="small material-icons">verified_user</i></h4>
+      <h4 class="tabHeaders center-align">HIGHLY RATED <i class="small material-icons">verified_user</i></h4>
       <div class=" movieTab scrollbar style-3">
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
+        <% for(var i=0;i<5;i++){var movie = mostRatedMovies[i];if(!movie)continue; %>
+          <div class="card horizontal">
+            <div class="card-image">
+              <img src='uploads/<%=movie.verPoster%>'>
             </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p><%= movie.oneLiner %></p>
+                <p><b>Released on : </b><%= movie.releaseDate.toString().substring(0,15) %></p>
+              </div>
+              <div class="card-action">
+                <a href="/review/<%= movie.type %>/<%= movie.id %>">Read More </a>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <p><a>LOAD MORE</a></p>
-      </div>
-      </div>
-      <div class="col s12 m12 l4">
-        <h4 id="trendHead" class="center-align">TRENDING  <i class="small material-icons">trending_up</i></h4>
-        <div class=" movieTab scrollbar style-3">
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-      </div>
+        <% } %>
+      <p><a href="#">LOAD MORE</a></p>
     </div>
   </div>
+  <div class="col s12 m12 l4">
+    <h4 id="trendHead" class="tabHeaders center-align">TRENDING  <i class="small material-icons">trending_up</i></h4>
+    <div class="movieTab scrollbar style-3">
+      <% for(var i=0;i<5;i++){var movie = trendingNews[i];if(!movie)continue; %>
+        <div class="card horizontal">
+          <div class="card-image">
+            <img src='uploads/<%=movie.verPoster%>'>
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <p><%= movie.oneLiner %></p>
+              <p><b>Released on : </b><%= movie.releaseDate.toString().substring(0,15) %></p>
+            </div>
+            <div class="card-action">
+              <a href="/review/<%= movie.type %>/<%= movie.id %>">Read More </a>
+            </div>
+          </div>
+        </div>
+      <% } %>
+    <p><a href="#">LOAD MORE</a></p>
+  </div>
 </div>
-
+</div>
+</div>
   <footer class="page-footer">
       <div class="container">
         <div class="row">

@@ -10,13 +10,12 @@
     <!--Mobile optimization-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/admin.css' />
-
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+      <link rel='stylesheet' href='/stylesheets/admin.css' />
     <link rel='stylesheet' href='/dist/summernote.css' />
     <script src='/dist/summernote.min.js'></script>
   </head>
@@ -27,19 +26,19 @@
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           <li class="nav-tabs"><a href="/"><b>HOME</b></a></li>
-          <li class="nav-tabs active"><a href="/about"><b>ABOUT US</b></a></li>
+          <li class="nav-tabs"><a href="/about"><b>ABOUT US</b></a></li>
           <li class="nav-tabs"><a href="/movies"><b>MOVIES</b></a></li>
           <li class="nav-tabs"><a href="/tvshows"><b>TV SHOWS</b></a></li>
           <li class="nav-tabs"><a href="#modal1"><b>CONTACT US</b></a></li>
-          <li class="nav-tabs"><a><b>SUBSCRIBE!</b></a></li>
+          <li class="nav-tabs"><a href="/logout"><b>LOGOUT</b></a></li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
           <li class="nav-tabs"><a href="/"><b>HOME</b></a></li>
-          <li class="nav-tabs active"><a href="/about"><b>ABOUT US</b></a></li>
+          <li class="nav-tabs"><a href="/about"><b>ABOUT US</b></a></li>
           <li class="nav-tabs"><a href="/movies"><b>MOVIES</b></a></li>
           <li class="nav-tabs"><a href="/tvshows"><b>TV SHOWS</b></a></li>
           <li class="nav-tabs"><a href="#modal1"><b>CONTACT US</b></a></li>
-          <li class="nav-tabs"><b>SUBSCRIBE</b></li>
+          <li class="nav-tabs"><a href="/logout"><b>LOGOUT</b></a></li>
         </ul>
       </div>
     </nav>
@@ -54,7 +53,7 @@
         <div class="modal-content" id="contact">
           <h4>Contact Us</h4>
           <div class="row">
-            <form class="col s12">
+            <form class="col s12" action="/contact" method="post">
               <div class="row">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">account_circle</i>
@@ -97,8 +96,23 @@
     </div>
     <br>
     <div class="container">
-      <h2>ADMIN PANEL </h2>
-      <form action="/admin">
+      <h2 id="mainHead">ADMIN PANEL </h2>
+      <h4 id="adminName"> Welcome <%= admin.fname %> <%= admin.lname %> </h4>
+      <br> <br>
+      <h3> What would like to review? </h3>
+      <p>
+        <input name="reviewType" type="radio" id="movie" value="m"/>
+        <label for="movie">A Movie</label>
+      </p>
+      <p>
+        <input name="reviewType" type="radio" id="tvshow" value="ts" />
+        <label for="tvshow">A TV Show</label>
+      </p>
+      <p>
+        <input name="reviewType" type="radio" id="trendingnews" value="tn" />
+        <label for="trendingnews">A Trending News on Movie</label>
+      </p>
+      <form action="/admin" method="post" enctype="multipart/form-data" class="hide" name="movie" id="0">
         <label>Movie Name </label>
         <input type="text" required name="mName">
         <label>Release Date</label>
@@ -109,16 +123,83 @@
         <input type="file" required name="horPoster">
         <label>Vertical Poster </label>
         <input type="file" required name="verPoster">
-      <div id="summernote">Hello Summernote</div>
+        <label>One Liner</label>
+        <input type="text" required name="oneLiner">
+        <label>Trailer Link</label>
+        <input type="url" required name="trailerLink">
+      <div id="summernote">Write your movie review here. . . </div>
       <label>Rating</label>
-      <input type="number" required name="rating">
-      <label>One should watch the movie? </label>
-      <input type="radio" name="shouldWatch">Yes
-      <input type="radio" name="shouldWatch">No
+      <input type="number" required name="rating" min="0" max="10">
+      <label>One should watch this movie? </label>
+      <p>
+        <input name="shouldWatch" type="radio" value="Yes" id="yes1"/>
+        <label for='yes1'>Yes</label>
+      </p>
+      <p>
+        <input name="shouldWatch" type="radio" value="No" id="no1"/>
+        <label for="no1">No</label>
+      </p>
       <input type="text" name="post" id="moviePost">
+      <input type="text" value="movie" name="checkType" hidden>
       <input type="submit">
     </form>
-        </div>
+    <form action="/admin" method="post" enctype="multipart/form-data" class="hide" name="tvshow" id="1">
+      <label>Tv Show Name </label>
+      <input type="text" required name="tName">
+      <label>Director name</label>
+      <input type="text" required name="director">
+      <label>Horizontal Poster </label>
+      <input type="file" required name="horPoster">
+      <label>Vertical Poster </label>
+      <input type="file" required name="verPoster">
+      <label>One Liner</label>
+      <input type="text" required name="oneLiner">
+      <div id="summernote1">Write your tvShow review here. . . </div>
+      <label>Rating</label>
+      <input type="number" required name="rating" min="0" max="10">
+      <label>One should watch this Tv Show? </label>
+      <p>
+        <input name="shouldWatch" type="radio" value="Yes" id="yes2"/>
+        <label for='yes2'>Yes</label>
+      </p>
+      <p>
+        <input name="shouldWatch" type="radio" value="No" id="no2"/>
+        <label for="no2">No</label>
+      </p>
+      <input type="text" name="post" id="tvshowPost">
+      <input type="text" value="tvshow" name="checkType" hidden>
+      <input type="submit">
+    </form>
+    <form action="/admin" method="post" enctype="multipart/form-data" class="hide" name="trendingnews" id="2">
+      <label>Movie Name </label>
+      <input type="text" required name="tnName">
+      <label>Release Date</label>
+      <input type="date" required name="releaseDate">
+      <label>Horizontal Poster </label>
+      <input type="file" required name="horPoster">
+      <label>Vertical Poster </label>
+      <input type="file" required name="verPoster">
+      <label>One Liner</label>
+      <input type="text" required name="oneLiner">
+      <label>Trailer Link</label>
+      <input type="url" required name="trailerLink">
+      <div id="summernote2">Write your trending news review here . . . </div>
+      <label>Rating</label>
+      <input type="number" required name="rating" min="0" max="10">
+      <label>One should watch this Tv Show? </label>
+      <p>
+        <input name="shouldWatch" type="radio" value="Yes" id="yes3"/>
+        <label for='yes3'>Yes</label>
+      </p>
+      <p>
+        <input name="shouldWatch" type="radio" value="No" id="no3"/>
+        <label for="no3">No</label>
+      </p>
+      <input type="text" name="post" id="trendingPost">
+      <input type="text" value="trending" name="checkType" hidden>
+      <input type="submit">
+    </form>
+    </div>
     <footer class="page-footer">
         <div class="container">
           <div class="row">
@@ -164,15 +245,61 @@
             minHeight: 300,             // set minimum height of editor
             maxHeight: 500,             // set maximum height of editor
             focus: true                  // set focus to editable area after initializing summernote
+            });
+          $('#summernote1').summernote({
+            height: 500,                 // set editor height
+            minHeight: 300,             // set minimum height of editor
+            maxHeight: 500,             // set maximum height of editor
+            focus: true                  // set focus to editable area after initializing summernote
+            });
+          $('#summernote2').summernote({
+            height: 500,                 // set editor height
+            minHeight: 300,             // set minimum height of editor
+            maxHeight: 500,             // set maximum height of editor
+            focus: true                  // set focus to editable area after initializing summernote
+            });
+        $('input:radio[name="reviewType"]').change(
+          function(){
+              if ($(this).val() == 'm') {
+                  $('#1').addClass("hide");
+                  $('#2').addClass("hide");
+                  $('#0').removeClass("hide");
+              }
+              else if($(this).val() == 'ts') {
+                  $('#0').addClass("hide");
+                  $('#2').addClass("hide");
+                  $('#1').removeClass("hide");
+              }
+              else{
+                  $('#1').addClass("hide");
+                  $('#0').addClass("hide");
+                  $('#2').removeClass("hide");
+              }
           });
+          var markupStr;
+          function doThis(){
+            var markupStr = $('#summernote').summernote('code');
+            //console.log(markupStr);
+            document.getElementById("moviePost").value=markupStr;
+          }
+          setInterval(doThis, 5000);
+
+          var markupStr1;
+          function doThis1(){
+            var markupStr1 = $('#summernote1').summernote('code');
+            //console.log(markupStr1);
+            document.getElementById("tvshowPost").value=markupStr1;
+          }
+          setInterval(doThis1, 5000);
+
+          var markupStr2;
+          function doThis2(){
+            var markupStr2 = $('#summernote2').summernote('code');
+            //console.log(markupStr2);
+            document.getElementById("trendingPost").value=markupStr2;
+          }
+          setInterval(doThis2, 5000);
         });
-        var markupStr;
-        function doThis(){
-          var markupStr = $('#summernote').summernote('code');
-          console.log(markupStr);
-          document.getElementById("moviePost").value=markupStr;
-        }
-        setInterval(doThis, 10000);
       </script>
   </body>
 </html>

@@ -2,49 +2,122 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var multer = require('multer');
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+});
+var mongoose = require('mongoose');
+var upload = multer({ storage: storage });
 var Admin = require('../models/admin');
 var Movie = require("../models/movie");
 var Subscriber = require('../models/subscriber');
 var TvShow = require("../models/tvShow");
+var TrendingNews = require("../models/trendingNews");
 var m = require("../middlewares");
 var nodemailer = require("nodemailer");
 var transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: 'umang.chaudhary2015@vit.ac.in', // Your email id
-            pass: '78654701' // Your password
+            user: '', // Your email id
+            pass: '' // Your password
         }
     });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('home', { title: 'Home - desiCinephiles' });
+  Movie.find().sort({postDate:-1}).limit(6).exec(function(err,movies){
+    if(err)throw err;
+    res.render('index',{
+      movies: movies,
+      title: 'Home - desiCinephiles'
+    });
+  });
 });
+
+router.post('/subscribe', function(req,res,next){
+  var subscriber = new Subscriber({
+    email: req.body.email
+  });
+  var mailOptions = {
+    from: '', // sender address
+    to: req.body.email, // list of receivers
+    subject: 'Successful Subscription :)', // Subject line
+    text: 'Greetings from desiCinephiles. . . . . . . . . . ' //, // plaintext body
+    // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
+  };
+  transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+      //console.log(error);
+      res.redirect('/error');
+    }
+    else{
+      //console.log('Message sent: ' + info.response);
+          res.redirect('/success');
+        };
+    });
+});
+
 router.get('/about', function(req, res, next) {
   res.render('about', { title: 'About Us - desiCinephiles' });
 });
+
 router.get('/movies', function(req, res, next) {
-  res.render('movie', { title: 'Movies - desiCinephiles' });
+  Movie.find().sort({postDate:-1}).limit(5).exec(function(err,recentMovies){
+    if(err)throw err;
+    Movie.find().sort({rating:-1}).limit(5).exec(function(err,mostRatedMovies){
+      if(err)throw err;
+      TrendingNews.find().sort({postDate:-1}).limit(5).exec(function(err,trendingNews){
+        if(err)throw err;
+        res.render('movie',{
+          recentMovies: recentMovies,
+          mostRatedMovies: mostRatedMovies,
+          trendingNews: trendingNews,
+          title: 'Movies - desiCinephiles'
+        });
+      });
+    });
+  });
 });
+
 router.get('/tvshows', function(req, res, next) {
-  res.render('tvshows', { title: 'TV Shows - desiCinephiles' });
+  TvShow.find().sort({postDate:-1}).limit(5).exec(function(err,recentTvShows){
+    if(err)throw err;
+    TvShow.find().sort({rating:-1}).limit(5).exec(function(err,mostRatedTvShows){
+      if(err)throw err;
+      res.render('tvshows', {
+        recentTvShows: recentTvShows,
+        mostRatedTvShows: mostRatedTvShows,
+        title: 'TV Shows - desiCinephiles'
+      });
+    });
+  });
 });
+
 router.get('/login', function(req, res, next) {
   res.render('login_signup', { title: 'Login / SignUp - desiCinephiles' });
 });
 
 router.post('/register', function(req, res) {
     req.body.username = req.body.id;
-    Admin.register(new Admin({ email : req.body.email,fname : req.body.fname,lname : req.body.lname, username : req.body.id, mobNo : req.body.mobNo
-    }), req.body.password, function(err, admin) {
-        if (err) {
-          console.log(err);
-            return res.render('login_signup', { admin : admin });
-        }
-        passport.authenticate('local')(req, res, function () {
-            res.redirect('/admin');
-        });
-    });
+    if(req.body.id=="umang18oct"||req.body.id=="cinePhile.1"||req.body.id=="cinePhile.2"||req.body.id=="cinePhile.3"||req.body.id=="cinePhile.4"){
+      Admin.register(new Admin({ email : req.body.email,fname : req.body.fname,lname : req.body.lname, username : req.body.id, mobNo : req.body.mobNo
+      }), req.body.password, function(err, admin) {
+          if (err) {
+            console.log(err);
+              return res.render('login_signup', { admin : admin });
+          }
+          passport.authenticate('local')(req, res, function () {
+              res.redirect('/admin');
+          });
+      });
+    }
+    else{
+      res.redirect('/error');
+    }
 });
 
 router.post('/login',function(req,res,next){
@@ -54,37 +127,166 @@ router.post('/login',function(req,res,next){
 } ,passport.authenticate('local'), function(req, res) {
     res.redirect('/admin');
 });
+function isLoggedIn(req,res,next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  else{
+    res.redirect('/');
+  }
+}
 
-router.get('/admin', function(req, res, next) {
-  res.render('admin', { title: 'Admin Panel - desiCinephiles', admin:req.admin });
+router.get('/admin', m.authenticatedOnly, function(req, res, next) {
+  // console.log("user"+req.user);
+  res.render('admin', { title: 'Admin Panel - desiCinephiles', admin:req.user });
 });
 
-router.get('/review/:postid', function(req, res, next) {
-  var id = req.params.postid;
-  console.log(id);
-  res.render('review', { title: 'Review - desiCinephiles' });
+router.get('/review/:type/:id', function(req, res, next) {
+  var type = req.params.type;
+  var id = mongoose.Types.ObjectId(req.params.id);
+  // console.log("type:"+type);
+  // console.log("id:"+id);
+  if(type=="movie"){
+    Movie.findOne({_id:id}).populate("author").exec(function(err, movie){
+      if(err)throw err;
+      //console.log(movie);
+      //console.log(movie.author);
+      res.render('review', {
+        title: 'Review - desiCinephiles',
+        review: movie
+      });
+    });
+  }
+  else if(type=="tvshow"){
+    TvShow.findOne({_id: id}).populate("author").exec(function(err, tvShow){
+      if(err)throw err;
+      res.render('review', {
+        title: 'Review - desiCinephiles',
+        review: tvShow
+      });
+    });
+  }
+  else if(type=="trending"){
+    TrendingNews.findOne({_id: id}).populate("author").exec(function(err, trendingNews){
+      res.render('review', {
+        title: 'Review - desiCinephiles',
+        review: trendingNews
+      });
+    });
+  }
+  else{
+    res.render('error');
+  }
 });
 
-router.post('/admin', m.authenticatedOnly, function(req, res) {
-  var movie = new Movie({
-    mName: req.body.mName,
-    director: req.body.director,
-    postDate : new Date(),
-    post: req.body.post,
-    rating: req.body.rating,
-    shouldWatch: req.body.shouldWatch,
-    horPoster: req.body.horPoster,
-    verPoster: req.body.verPoster,
-    releaseDate: req.body.releaseDate,
-    id: req.body.id,
-    author : req.admin
-  });
-  movie.save(function(err){
-    if(err){
-      console.log("ERROR : ",err);
-    }else{
-      return res.redirect("/admin");
+router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
+  //console.log(req.files);
+  req.admin=req.user;
+  console.log(req.body.checkType);
+  if(req.body.checkType=="movie"){
+    console.log(req.admin);
+    var movie = new Movie({
+      mName: req.body.mName,
+      director: req.body.director,
+      postDate : new Date(),
+      post: req.body.post,
+      rating: req.body.rating,
+      shouldWatch: req.body.shouldWatch,
+      horPoster: req.files[0].filename,
+      verPoster: req.files[1].filename,
+      releaseDate: req.body.releaseDate,
+      oneLiner: req.body.oneLiner,
+      trailerLink: req.body.trailerLink,
+      author : req.admin,
+      type: req.body.checkType
+    });
+    movie.save(function(err){
+      if(err){
+        console.log("ERROR : ",err);
+      }else{
+        return res.redirect("/admin");
+      }
+    });
+  }
+  else if(req.body.checkType=="tvshow"){
+    var tvshow = new TvShow({
+      tName: req.body.tName,
+      director: req.body.director,
+      postDate : new Date(),
+      post: req.body.post,
+      rating: req.body.rating,
+      shouldWatch: req.body.shouldWatch,
+      horPoster: req.files[0].filename,
+      verPoster: req.files[1].filename,
+      oneLiner: req.body.oneLiner,
+      author : req.admin,
+      type: req.body.checkType
+    });
+    tvshow.save(function(err){
+      if(err){
+        console.log("ERROR : ",err);
+      }else{
+        return res.redirect("/admin");
+      }
+    });
+  }
+  else{
+    var trending = new TrendingNews({
+      mName: req.body.tnName,
+      director: req.body.director,
+      postDate : new Date(),
+      post: req.body.post,
+      rating: req.body.rating,
+      horPoster: req.files[0].filename,
+      verPoster: req.files[1].filename,
+      releaseDate: req.body.releaseDate,
+      oneLiner: req.body.oneLiner,
+      trailerLink: req.body.trailerLink,
+      author : req.admin,
+      type: req.body.checkType,
+      shouldWatch: req.body.shouldWatch,
+    });
+    trending.save(function(err){
+      if(err){
+        console.log("ERROR : ",err);
+      }else{
+        return res.redirect("/admin");
+      }
+    });
+  }
+});
+
+router.post('/contact', function(req,res,next){
+  var mailOptions = {
+    from: '', // sender address
+    to: req.body.email, // list of receivers
+    subject: 'Successful Subscription :)', // Subject line
+    text: 'Greetings from desiCinephiles. . . . . . . . . . ' //, // plaintext body
+    // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
+  };
+  transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+      //console.log(error);
+      res.redirect('/error');
     }
-  });
+    else{
+      //console.log('Message sent: ' + info.response);
+          res.redirect('/success');
+        };
+    });
 });
+
+router.get('/success', function(req, res, next) {
+  res.render('success', { title: 'Successful Subscription - desiCinephiles'});
+});
+
+router.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
+
+router.get('/error',function(req,res){
+  res.render('error', {title: 'Unauthorized - desiCinephiles'});
+});
+
 module.exports = router;

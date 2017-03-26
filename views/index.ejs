@@ -12,12 +12,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/home.css' />
+    <link rel='stylesheet' href='/stylesheets/index.css' />
   </head>
   <body>
     <nav>
       <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Logo Area</a>
+        <a href="#!" class="brand-logo"><img  id="logo" src="/images/logo_1.jpg"></a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           <li class="nav-tabs active"><a href="/"><b>HOME</b></a></li>
@@ -25,7 +25,7 @@
           <li class="nav-tabs"><a href="/movies"><b>MOVIES</b></a></li>
           <li class="nav-tabs"><a href="/tvshows"><b>TV SHOWS</b></a></li>
           <li class="nav-tabs"><a class="modal-trigger waves-effect waves-light" href="#modal1"><b>CONTACT US</b></a></li>
-          <li class="nav-tabs"><a><b>SUBSCRIBE!</b></a></li>
+          <li class="nav-tabs"><a class='dropdown-button' href='#' data-activates='dropdown1'><b>SUBSCRIBE!</b></a></li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
           <li class="nav-tabs active"><a href="/"><b>HOME</b></a></li>
@@ -37,6 +37,18 @@
         </ul>
       </div>
     </nav>
+    <!-- Dropdown Structure -->
+      <ul id='dropdown1' class='dropdown-content'>
+        <li>Enter Email</li>
+        <li class="divider"></li>
+        <li>
+          <form action="/subscribe" method="post">
+            <input type="email" required>
+            <li class="divider"></li>
+            <input type="submit">
+          </form>
+        </li>
+      </ul>
   <!-- Modal Structure -->
   <div id="modal2" class="modal">
     <div class="modal-content cover">
@@ -62,7 +74,7 @@
       <div class="modal-content" id="contact">
         <h4>Contact Us</h4>
         <div class="row">
-          <form class="col s12">
+          <form class="col s12" action="/contact" method="post">
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
@@ -114,122 +126,54 @@
     <div class="container">
       <!-- <a class="waves-effect waves-light btn" href="#modal2">View Cover</a> -->
     <div class="carousel carousel-slider center" data-indicators="true" id="home-carousel">
-      <div class="carousel-item red white-text" href="#one!">
-        <h2>First Panel</h2>
-        <p class="white-text">This is your first panel</p>
-      </div>
-      <div class="carousel-item amber white-text" href="#two!">
-        <h2>Second Panel</h2>
-        <p class="white-text">This is your second panel</p>
-      </div>
-      <div class="carousel-item green white-text" href="#three!">
-        <h2>Third Panel</h2>
-        <p class="white-text">This is your third panel</p>
-      </div>
-      <div class="carousel-item blue white-text" href="#four!">
-        <h2>Fourth Panel</h2>
-        <p class="white-text">This is your fourth panel</p>
-      </div>
-      <div class="carousel-item purple white-text" href="#five!">
-        <h2>Fifth Panel</h2>
-        <p class="white-text">This is your fifth panel</p>
-      </div>
+      <% for(var i=0;i<5;i++){var movie = movies[i];if(!movie)continue; %>
+        <a href="/review/<%= movie.type %>/<%= movie.id %>"><div class="carousel-item red white-text" style="background-image:url('uploads/<%=movie.horPoster%>');background-size:cover;background-origin:center">
+          <h2><%= movie.mName %></h2>
+          <p class="white-text"><%= movie.oneLiner %></p>
+        </div> </a>
+			<% } %>
     </div>
     <br>
     <h3> LATEST REVIEWS </h3>
     <div class="row">
+      <% for(var i=0;i<3;i++){var movie = movies[i];if(!movie)continue; %>
       <div class="col s12 m4 l4">
         <div class="card horizontal">
           <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
+            <img src='uploads/<%=movie.verPoster%>'>
           </div>
           <div class="card-stacked">
             <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
+              <p><%= movie.oneLiner %></p>
+              <p><b>Released on : </b><%= movie.releaseDate.toString().substring(0,15) %></p>
             </div>
             <div class="card-action">
-              <a href="#">This is a link</a>
+              <a href="/review/<%= movie.type %>/<%= movie.id %>">Read More</a>
             </div>
           </div>
         </div>
       </div>
-      <div class="col s12 m4 l4">
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col s12 m4 l4">
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <% } %>
     </div>
     <div class="row">
+      <% for(var i=3;i<6;i++){var movie = movies[i];if(!movie)continue;%>
       <div class="col s12 m4 l4">
         <div class="card horizontal">
           <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
+            <img src='uploads/<%=movie.verPoster%>'>
           </div>
           <div class="card-stacked">
             <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
+              <p><%= movie.oneLiner %></p>
+              <p><b>Released on : </b><%= movie.releaseDate.toString().substring(0,15) %></p>
             </div>
             <div class="card-action">
-              <a href="#">This is a link</a>
+              <a href="/review/<%= movie.type %>/<%= movie.id %>">Read More</a>
             </div>
           </div>
         </div>
       </div>
-      <div class="col s12 m4 l4">
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col s12 m4 l4">
-        <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://lorempixel.com/100/190/nature/6">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <% } %>
     </div>
   </div>
 </div>
@@ -294,6 +238,22 @@
           } // Callback for Modal close
         });
         $('#modal1').modal();
+        $('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 250,
+            constrainWidth: true, // Does not change width of dropdown to that of the activator
+            hover: true, // Activate on hover
+            gutter: 0, // Spacing from edge
+            belowOrigin: true, // Displays dropdown below the button
+            alignment: 'right', // Displays dropdown with edge aligned to the left of button
+            stopPropagation: true // Stops event propagation
+          }
+        );
+        $('.dropdown-button').dropdown('open');
+        $('.dropdown-button').mouseout(function(){
+          $('.dropdown-button').dropdown('open');
+        });
+
         $('.carousel.carousel-slider').carousel({fullWidth: true,duration: 300});
         autoplay();
         function autoplay() {

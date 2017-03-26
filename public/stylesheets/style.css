@@ -7,6 +7,10 @@ a {
 nav{
   background-color: black;
 }
+#logo{
+  max-width: 30vw;
+  max-height: 9vh;
+}
 .nav-wrapper ul li a:hover{
   background-color: white;
   color: black !important;

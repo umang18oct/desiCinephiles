@@ -1,0 +1,9 @@
+#mainPic{
+  height: 300px!important;
+  min-height: 300px!important;
+  width: 100%;
+  border-radius: 20px;
+}
+.rating{
+  padding: 10px;
+}

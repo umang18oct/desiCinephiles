@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/about.css' />
+    <link rel='stylesheet' href='/stylesheets/review.css' />
   </head>
   <body>
     <nav>
@@ -20,7 +20,7 @@
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           <li class="nav-tabs"><a href="/"><b>HOME</b></a></li>
-          <li class="nav-tabs active"><a href="/about"><b>ABOUT US</b></a></li>
+          <li class="nav-tabs"><a href="/about"><b>ABOUT US</b></a></li>
           <li class="nav-tabs"><a href="/movies"><b>MOVIES</b></a></li>
           <li class="nav-tabs"><a href="/tvshows"><b>TV SHOWS</b></a></li>
           <li class="nav-tabs"><a href="#modal1"><b>CONTACT US</b></a></li>
@@ -28,7 +28,7 @@
         </ul>
         <ul class="side-nav" id="mobile-demo">
           <li class="nav-tabs"><a href="/"><b>HOME</b></a></li>
-          <li class="nav-tabs active"><a href="/about"><b>ABOUT US</b></a></li>
+          <li class="nav-tabs"><a href="/about"><b>ABOUT US</b></a></li>
           <li class="nav-tabs"><a href="/movies"><b>MOVIES</b></a></li>
           <li class="nav-tabs"><a href="/tvshows"><b>TV SHOWS</b></a></li>
           <li class="nav-tabs"><a href="#modal1"><b>CONTACT US</b></a></li>
@@ -47,7 +47,7 @@
         <div class="modal-content" id="contact">
           <h4>Contact Us</h4>
           <div class="row">
-            <form class="col s12">
+            <form class="col s12" action="/contact" method="post">
               <div class="row">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">account_circle</i>
@@ -90,8 +90,32 @@
     </div>
     <br>
     <div class="container">
-    </div>
+      <img src='/uploads/<%=review.horPoster%>' id="mainPic"/>
+      <blockquote>
+      <% if(review.type=="tvshow") { %>
+        <h2><%= review.tName %></h2>
+        <% } else { %>
+         <h2><%= review.mName %></h2>
+       <% } %>
+       <h6 style="float: right;">Published On: <span style="font-size: 1.2rem;"><i> <%= review.postDate.toString().substring(0,15) %></i></span></h6>
+       <h6>Published By: <span style="font-size: 1.2rem;"><i> <%= review.author.fname %> <%= review.author.lname %></i></span></h6>
+       <h5><i><%= review.oneLiner %></i></h5>
+       </blockquote>
+      <hr>
 
+      <input type="text" value="<%= review.post %>" hidden id="postt">
+      <div id="actualPost"></div>
+      <br>
+      <% if(review.shouldWatch=="Yes") { %>
+        <div id="ratingArea" style="background-color:green">
+          <div class="rating"> <h2><%= review.rating %> <span style="font-size: 2rem;"><i>/ 10 </i></span></h2></div>
+        </div>
+      <% } else { %>
+        <div id="ratingArea" style="background-color:red">
+          <div class="rating"> <h2><%= review.rating %> <span style="font-size: 2rem;"><i>/ 10 </i></span></h2></div>
+        </div>
+      <% } %>
+    </div>
     <footer class="page-footer">
         <div class="container">
           <div class="row">
@@ -133,6 +157,10 @@
       $(document).ready(function(){
         $(".button-collapse").sideNav();
         $('.modal').modal();
+        var str = document.getElementById("postt").value;
+        var html = $.parseHTML(str);
+        //console.log(html);
+        $('#actualPost').append(html);
       });
     </script>
   </body>

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Movie = new Schema({
+var TrendingNews = new Schema({
     mName: String,
     author: {
         type :mongoose.Schema.ObjectId,
@@ -11,11 +11,9 @@ var Movie = new Schema({
     horPoster: String,
     verPoster: String,
     rating: Number,
-    shouldWatch: String,
-    director: String,
     releaseDate: {type: Date},
     oneLiner: String,
-    trailerLink: String,
-    type: String
+    type: String,
+    shouldWatch: String
 });
-module.exports = mongoose.model('Movie', Movie);
+module.exports = mongoose.model('TrendingNews', TrendingNews);
