@@ -2,38 +2,40 @@
 <html>
   <head>
     <title><%= title %></title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ranga" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="/stylesheets/materialize.css"  media="screen,projection"/>
     <!--Mobile optimization-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/movie.css' />
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' href='/stylesheets/index.css' />
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="/javascripts/materialize.js"></script>
   </head>
   <body>
     <nav>
       <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Logo Area</a>
+        <!-- <a href="#!" class="brand-logo"><img  id="logo" src="/images/logo_1.jpg"></a> -->
+        <a href="#!" class="brand-logo"><i>Desi Cinephiles</i></a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <li class="nav-tabs"><a href="/home"><b>HOME</b></a></li>
+          <li class="nav-tabs active" style="background-color:black"><a href="/"><b>HOME</b></a></li>
           <li class="nav-tabs"><a href="/about"><b>ABOUT US</b></a></li>
-          <li class="nav-tabs active"><a href="/movies"  style="background-color:black"><b>MOVIES</b></a></li>
+          <li class="nav-tabs"><a href="/movies"><b>MOVIES</b></a></li>
           <li class="nav-tabs"><a href="/tvshows"><b>TV SHOWS</b></a></li>
-          <li class="nav-tabs"><a href="#modal1"><b>CONTACT US</b></a></li>
+          <li class="nav-tabs"><a class="modal-trigger waves-effect waves-light" href="#modal1"><b>CONTACT US</b></a></li>
           <li class="nav-tabs"><a onclick="$('.tap-target').tapTarget('open')"><b>SUBSCRIBE!</b></a></li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
-          <li class="nav-tabs"><a href="/home"><b>HOME</b></a></li>
+          <li class="nav-tabs active"><a href="/"><b>HOME</b></a></li>
           <li class="nav-tabs"><a href="/about"><b>ABOUT US</b></a></li>
-          <li class="nav-tabs active"><a href="/movies"><b>MOVIES</b></a></li>
+          <li class="nav-tabs"><a href="/movies"><b>MOVIES</b></a></li>
           <li class="nav-tabs"><a href="/tvshows"><b>TV SHOWS</b></a></li>
-          <li class="nav-tabs"><a href="#modal1"><b>CONTACT US</b></a></li>
+          <li class="nav-tabs"><a class="modal-trigger waves-effect waves-light" href="#modal1"><b>CONTACT US</b></a></li>
           <li class="nav-tabs"><a onclick="$('.tap-target').tapTarget('open')"><b>SUBSCRIBE!</b></a></li>
         </ul>
       </div>
@@ -58,13 +60,7 @@
         <a class="btn btn-floating btn-large cyan tap-target-origin"><i class="material-icons">phonelink_ring</i></a>
       </div>
     </div>
-    <aside id="sticky-social">
-    <ul>
-        <li><a href="#" class="entypo-facebook" target="_blank"><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
-        <li><a href="#" class="entypo-twitter" target="_blank"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
-        <li><a href="#" class="entypo-instagrem" target="_blank"><i class="fa fa-instagram"></i><span>Instagram</span></a></li>
-    </ul>
-  </aside>
+  <!-- Modal Structure -->
   <div id="modal1" class="modal modal-fixed-footer">
       <div class="modal-content" id="contact">
         <h4>Contact Us</h4>
@@ -110,58 +106,29 @@
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">SUBMIT</a>
       </div>
   </div>
-  <br>
-  <div class="container">
-    <h2 class="center"> MOVIES </h2>
+  <div id="main">
+    <aside id="sticky-social">
+      <ul>
+          <li><a href="#" class="entypo-facebook" target="_blank"><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
+          <li><a href="#" class="entypo-twitter" target="_blank"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
+          <li><a href="#" class="entypo-instagrem" target="_blank"><i class="fa fa-instagram"></i><span>Instagram</span></a></li>
+        </ul>
+    </aside>
+    <div class="container">
+      <!-- <a class="waves-effect waves-light btn" href="#modal2">View Cover</a> -->
+    <div class="carousel carousel-slider center" data-indicators="true" id="home-carousel">
+      <% for(var i=0;i<5;i++){var movie = movies[i];if(!movie)continue; %>
+        <a href="/review/<%= movie.type %>/<%= movie.id %>"><div class="carousel-item red white-text" style="background-image:url('<%=movie.horPoster%>');background-size:cover;background-origin:center">
+          <h2><%= movie.mName %></h2>
+          <p class="white-text"><%= movie.oneLiner %></p>
+        </div> </a>
+			<% } %>
+    </div>
+    <br>
+    <h3> LATEST REVIEWS </h3>
     <div class="row">
-      <div class="col s12 m12 l4">
-        <h4 class="tabHeaders center-align">LATEST <i class="small material-icons">new_releases</i></h4>
-        <div class="movieTab scrollbar style-3">
-          <% for(var i=0;i<5;i++){var movie = recentMovies[i];if(!movie)continue; %>
-            <div class="card horizontal">
-              <div class="card-image">
-                <img src='<%=movie.verPoster%>'>
-              </div>
-              <div class="card-stacked">
-                <div class="card-content">
-                  <p><%= movie.oneLiner %></p>
-                  <p><b>Released on : </b><%= movie.releaseDate.toString().substring(0,15) %></p>
-                </div>
-                <div class="card-action">
-                  <a href="/review/<%= movie.type %>/<%= movie.id %>">Read More </a>
-                </div>
-              </div>
-            </div>
-          <% } %>
-        <p><a href="#">LOAD MORE</a></p>
-      </div>
-    </div>
-    <div class="col s12 m12 l4">
-      <h4 class="tabHeaders center-align">HIGHLY RATED <i class="small material-icons">verified_user</i></h4>
-      <div class=" movieTab scrollbar style-3">
-        <% for(var i=0;i<5;i++){var movie = mostRatedMovies[i];if(!movie)continue; %>
-          <div class="card horizontal">
-            <div class="card-image">
-              <img src='<%=movie.verPoster%>'>
-            </div>
-            <div class="card-stacked">
-              <div class="card-content">
-                <p><%= movie.oneLiner %></p>
-                <p><b>Released on : </b><%= movie.releaseDate.toString().substring(0,15) %></p>
-              </div>
-              <div class="card-action">
-                <a href="/review/<%= movie.type %>/<%= movie.id %>">Read More </a>
-              </div>
-            </div>
-          </div>
-        <% } %>
-      <p><a href="#">LOAD MORE</a></p>
-    </div>
-  </div>
-  <div class="col s12 m12 l4">
-    <h4 id="trendHead" class="tabHeaders center-align">TRENDING  <i class="small material-icons">trending_up</i></h4>
-    <div class="movieTab scrollbar style-3">
-      <% for(var i=0;i<5;i++){var movie = trendingNews[i];if(!movie)continue; %>
+      <% for(var i=0;i<3;i++){var movie = movies[i];if(!movie)continue; %>
+      <div class="col s12 m4 l4">
         <div class="card horizontal">
           <div class="card-image">
             <img src='<%=movie.verPoster%>'>
@@ -172,15 +139,34 @@
               <p><b>Released on : </b><%= movie.releaseDate.toString().substring(0,15) %></p>
             </div>
             <div class="card-action">
-              <a href="/review/<%= movie.type %>/<%= movie.id %>">Read More </a>
+              <a href="/review/<%= movie.type %>/<%= movie.id %>">Read More</a>
             </div>
           </div>
         </div>
+      </div>
       <% } %>
-    <p><a href="#">LOAD MORE</a></p>
+    </div>
+    <div class="row">
+      <% for(var i=3;i<6;i++){var movie = movies[i];if(!movie)continue;%>
+      <div class="col s12 m4 l4">
+        <div class="card horizontal">
+          <div class="card-image">
+            <img src='<%=movie.verPoster%>'>
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <p><%= movie.oneLiner %></p>
+              <p><b>Released on : </b><%= movie.releaseDate.toString().substring(0,15) %></p>
+            </div>
+            <div class="card-action">
+              <a href="/review/<%= movie.type %>/<%= movie.id %>">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
   </div>
-</div>
-</div>
 </div>
   <footer class="page-footer">
       <div class="container">
@@ -216,19 +202,18 @@
         </div>
       </div>
     </footer>
+    <!--Import jQuery before materialize.js-->
     <script>
       $(document).ready(function(){
         $(".button-collapse").sideNav();
-        $('.modal').modal();
         $('.tap-target').tapTarget('close');
-        // var elementPosition = $('#treadHead').offset();
-        // $(window).scroll(function(){
-        // if($(window).scrollTop() > elementPosition.top){
-        //       $('#treadHead').css('position','fixed').css('top','0');
-        // } else {
-        //     $('#treadHead').css('position','static');
-        // }
-        // });
+        $('#modal1').modal();
+        $('.carousel.carousel-slider').carousel({fullWidth: true,duration: 300});
+        autoplay();
+        function autoplay() {
+          $('.carousel').carousel('next');
+          setTimeout(autoplay, 4500);
+        }
       });
     </script>
   </body>

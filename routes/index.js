@@ -45,6 +45,16 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/home', function(req, res, next) {
+  Movie.find().sort({postDate:-1}).limit(6).exec(function(err,movies){
+    if(err)throw err;
+    res.render('home',{
+      movies: movies,
+      title: 'Home - desiCinephiles'
+    });
+  });
+});
+
 router.post('/subscribe', function(req,res,next){
   var subscriber = new Subscriber({
     email: req.body.email
@@ -139,7 +149,7 @@ function isLoggedIn(req,res,next){
     return next();
   }
   else{
-    res.redirect('/');
+    res.redirect('/home');
   }
 }
 
@@ -290,7 +300,7 @@ router.get('/success', function(req, res, next) {
 
 router.get('/logout', function(req, res) {
     req.logout();
-    res.redirect('/');
+    res.redirect('/home');
 });
 
 router.get('/error',function(req,res){
