@@ -7,25 +7,28 @@
     <link href="https://fonts.googleapis.com/css?family=Ranga" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="/stylesheets/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/materialize.css"  media="screen,projection"/>
     <!--Mobile optimization-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/index.css' />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/materialize.js"></script>
   </head>
   <body>
     <nav>
       <div class="nav-wrapper">
-        <a href="#!" class="brand-logo"><img  id="logo" src="/images/logo_1.jpg"></a>
+        <!-- <a href="#!" class="brand-logo"><img  id="logo" src="/images/logo_1.jpg"></a> -->
+        <a href="#!" class="brand-logo"><i>Desi Cinephiles</i></a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <li class="nav-tabs active"><a href="/"><b>HOME</b></a></li>
+          <li class="nav-tabs active" style="background-color:black"><a href="/"><b>HOME</b></a></li>
           <li class="nav-tabs"><a href="/about"><b>ABOUT US</b></a></li>
           <li class="nav-tabs"><a href="/movies"><b>MOVIES</b></a></li>
           <li class="nav-tabs"><a href="/tvshows"><b>TV SHOWS</b></a></li>
           <li class="nav-tabs"><a class="modal-trigger waves-effect waves-light" href="#modal1"><b>CONTACT US</b></a></li>
-          <li class="nav-tabs"><a class='dropdown-button' href='#' data-activates='dropdown1'><b>SUBSCRIBE!</b></a></li>
+          <li class="nav-tabs"><a onclick="$('.tap-target').tapTarget('open')"><b>SUBSCRIBE!</b></a></li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
           <li class="nav-tabs active"><a href="/"><b>HOME</b></a></li>
@@ -33,22 +36,30 @@
           <li class="nav-tabs"><a href="/movies"><b>MOVIES</b></a></li>
           <li class="nav-tabs"><a href="/tvshows"><b>TV SHOWS</b></a></li>
           <li class="nav-tabs"><a class="modal-trigger waves-effect waves-light" href="#modal1"><b>CONTACT US</b></a></li>
-          <li class="nav-tabs"><b>SUBSCRIBE!</b></li>
+          <li class="nav-tabs"><a onclick="$('.tap-target').tapTarget('open')"><b>SUBSCRIBE!</b></a></li>
         </ul>
       </div>
     </nav>
-    <!-- Dropdown Structure -->
-      <ul id='dropdown1' class='dropdown-content'>
-        <li>Enter Email</li>
-        <li class="divider"></li>
-        <li>
-          <form action="/subscribe" method="post">
-            <input type="email" required>
-            <li class="divider"></li>
-            <input type="submit">
+    <!-- Element Showed -->
+    <div class="fixed-action-btn pulse" style="bottom: 45px; right: 24px;">
+          <a id="menu" class="btn btn-floating btn-large cyan" onclick="$('.tap-target').tapTarget('close')"><i class="material-icons">phonelink_ring</i></a>
+    </div>
+    <div class="tap-target-wrapper open" style="right: -348px; bottom: -327px; position: fixed;" onmouseover="$('.tap-target').tapTarget('open')">
+      <div class="tap-target cyan" data-activates="menu">
+        <div class="tap-target-content white-text" style="width: 456px; height: 400px; top: 0px; right: 0px; bottom: 0px; left: 0px; padding: 56px; vertical-align: bottom;padding-bottom:0;">
+          <h5>&nbsp;&nbsp;Subscribe to our News Letter!</h5>
+            <form action="/subscribe" method="post">
+            <label for="subscriberEmail" style="color: white;font-size: 1.2rem;">Enter your Email ID below</label>
+            <input type="email" id="subscriberEmail" style="color: white;font-size: 1.2rem;border-bottom:1px solid white;" required>
+            <br>
+            <input type="submit" class="btn">
           </form>
-        </li>
-      </ul>
+        </div>
+      </div>
+      <div class="tap-target-wave" style="top: 344px; left: 344px; width: 112px; height: 112px;">
+        <a class="btn btn-floating btn-large cyan tap-target-origin"><i class="material-icons">phonelink_ring</i></a>
+      </div>
+    </div>
   <!-- Modal Structure -->
   <div id="modal2" class="modal">
     <div class="modal-content cover">
@@ -212,8 +223,6 @@
       </div>
     </footer>
     <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
     <script>
       $(document).ready(function(){
         $(".button-collapse").sideNav();
@@ -237,23 +246,8 @@
             $('#main').css('filter','blur(0px)');
           } // Callback for Modal close
         });
+        $('.tap-target').tapTarget('close');
         $('#modal1').modal();
-        $('.dropdown-button').dropdown({
-            inDuration: 300,
-            outDuration: 250,
-            constrainWidth: true, // Does not change width of dropdown to that of the activator
-            hover: true, // Activate on hover
-            gutter: 0, // Spacing from edge
-            belowOrigin: true, // Displays dropdown below the button
-            alignment: 'right', // Displays dropdown with edge aligned to the left of button
-            stopPropagation: true // Stops event propagation
-          }
-        );
-        $('.dropdown-button').dropdown('open');
-        $('.dropdown-button').mouseout(function(){
-          $('.dropdown-button').dropdown('open');
-        });
-
         $('.carousel.carousel-slider').carousel({fullWidth: true,duration: 300});
         autoplay();
         function autoplay() {
