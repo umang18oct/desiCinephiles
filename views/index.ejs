@@ -138,7 +138,7 @@
       <!-- <a class="waves-effect waves-light btn" href="#modal2">View Cover</a> -->
     <div class="carousel carousel-slider center" data-indicators="true" id="home-carousel">
       <% for(var i=0;i<5;i++){var movie = movies[i];if(!movie)continue; %>
-        <a href="/review/<%= movie.type %>/<%= movie.id %>"><div class="carousel-item red white-text" style="background-image:url('uploads/<%=movie.horPoster%>');background-size:cover;background-origin:center">
+        <a href="/review/<%= movie.type %>/<%= movie.id %>"><div class="carousel-item red white-text" style="background-image:url('<%=movie.horPoster%>');background-size:cover;background-origin:center">
           <h2><%= movie.mName %></h2>
           <p class="white-text"><%= movie.oneLiner %></p>
         </div> </a>
@@ -151,7 +151,7 @@
       <div class="col s12 m4 l4">
         <div class="card horizontal">
           <div class="card-image">
-            <img src='uploads/<%=movie.verPoster%>'>
+            <img src='<%=movie.verPoster%>'>
           </div>
           <div class="card-stacked">
             <div class="card-content">
@@ -171,7 +171,7 @@
       <div class="col s12 m4 l4">
         <div class="card horizontal">
           <div class="card-image">
-            <img src='uploads/<%=movie.verPoster%>'>
+            <img src='<%=movie.verPoster%>'>
           </div>
           <div class="card-stacked">
             <div class="card-content">

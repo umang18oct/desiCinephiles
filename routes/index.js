@@ -2,10 +2,17 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var multer = require('multer');
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads')
-  },
+var cloudinary = require("cloudinary");
+var cloudinaryStorage = require('multer-storage-cloudinary');
+cloudinary.config({
+  cloud_name: 'umang18oct',
+  api_key: '356452225574928',
+  api_secret: '67mKf9pg28kUGEvTX7QKlzS_spU'
+});
+var storage = cloudinaryStorage({
+  cloudinary: cloudinary,
+  folder: 'desiCinephiles',
+  allowedFormats: ['jpg', 'png'],
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now())
   }
@@ -182,6 +189,7 @@ router.get('/review/:type/:id', function(req, res, next) {
 router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
   //console.log(req.files);
   req.admin=req.user;
+
   console.log(req.body.checkType);
   if(req.body.checkType=="movie"){
     console.log(req.admin);
@@ -192,8 +200,8 @@ router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
       post: req.body.post,
       rating: req.body.rating,
       shouldWatch: req.body.shouldWatch,
-      horPoster: req.files[0].filename,
-      verPoster: req.files[1].filename,
+      horPoster: req.files[0].url,
+      verPoster: req.files[1].url,
       releaseDate: req.body.releaseDate,
       oneLiner: req.body.oneLiner,
       trailerLink: req.body.trailerLink,
@@ -216,8 +224,8 @@ router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
       post: req.body.post,
       rating: req.body.rating,
       shouldWatch: req.body.shouldWatch,
-      horPoster: req.files[0].filename,
-      verPoster: req.files[1].filename,
+      horPoster: req.files[0].url,
+      verPoster: req.files[1].url,
       oneLiner: req.body.oneLiner,
       author : req.admin,
       type: req.body.checkType
@@ -237,8 +245,8 @@ router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
       postDate : new Date(),
       post: req.body.post,
       rating: req.body.rating,
-      horPoster: req.files[0].filename,
-      verPoster: req.files[1].filename,
+      horPoster: req.files[0].url,
+      verPoster: req.files[1].url,
       releaseDate: req.body.releaseDate,
       oneLiner: req.body.oneLiner,
       trailerLink: req.body.trailerLink,
