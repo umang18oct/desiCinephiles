@@ -112,7 +112,7 @@
     </div>
     <br>
     <div class="container">
-      <img src='<%=review.horPoster%>' id="mainPic"/>
+      <img class="hoverable" src='<%=review.horPoster%>' id="mainPic"/>
       <blockquote>
       <% if(review.type=="tvshow") { %>
         <h2><%= review.tName %></h2>
@@ -129,11 +129,11 @@
       <div id="actualPost"></div>
       <br>
       <% if(review.shouldWatch=="Yes") { %>
-        <div id="ratingArea" style="background-color:green">
+        <div id="ratingArea" style="background-color:#00e676">
           <div class="rating"> <h2><%= review.rating %> <span style="font-size: 2rem;"><i>/ 10 </i></span></h2></div>
         </div>
       <% } else { %>
-        <div id="ratingArea" style="background-color:red">
+        <div id="ratingArea" style="background-color:#e53935">
           <div class="rating"> <h2><%= review.rating %> <span style="font-size: 2rem;"><i>/ 10 </i></span></h2></div>
         </div>
       <% } %>
