@@ -44,7 +44,7 @@
     <div class="fixed-action-btn pulse" style="bottom: 45px; right: 24px;">
           <a id="menu" class="btn btn-floating btn-large cyan" onclick="$('.tap-target').tapTarget('close')"><i class="material-icons">phonelink_ring</i></a>
     </div>
-    <div class="tap-target-wrapper open" style="right: -348px; bottom: -327px; position: fixed;" onmouseover="$('.tap-target').tapTarget('open')">
+    <div class="tap-target-wrapper" style="right: -348px; bottom: -327px; position: fixed;" onmouseover="$('.tap-target').tapTarget('open')">
       <div class="tap-target cyan" data-activates="menu">
         <div class="tap-target-content white-text" style="width: 456px; height: 400px; top: 0px; right: 0px; bottom: 0px; left: 0px; padding: 56px; vertical-align: bottom;padding-bottom:0;">
           <h5>&nbsp;&nbsp;Subscribe to our News Letter!</h5>
@@ -116,7 +116,7 @@
               <div class="input-field col s12">
                 <i class="material-icons prefix">email</i>
                 <textarea id="message" class="materialize-textarea"></textarea>
-                <label for="message">Textarea</label>
+                <label for="message">Message</label>
               </div>
             </div>
           </form>
@@ -136,14 +136,14 @@
     </aside>
     <div class="container">
       <!-- <a class="waves-effect waves-light btn" href="#modal2">View Cover</a> -->
-    <div class="carousel carousel-slider center" data-indicators="true" id="home-carousel">
-      <% for(var i=0;i<5;i++){var movie = movies[i];if(!movie)continue; %>
-        <a href="/review/<%= movie.type %>/<%= movie.id %>"><div class="carousel-item red white-text" style="background-image:url('<%=movie.horPoster%>');background-size:cover;background-origin:center">
-          <h2><%= movie.mName %></h2>
-          <p class="white-text"><%= movie.oneLiner %></p>
-        </div> </a>
-			<% } %>
-    </div>
+      <div class="carousel carousel-slider center" data-indicators="true" id="home-carousel">
+        <% for(var i=0;i<5;i++){var movie = movies[i];if(!movie)continue; %>
+          <a href="/review/<%= movie.type %>/<%= movie.id %>"><div class="carousel-item red white-text" style="background: linear-gradient(rgba(20, 20, 20, .2),rgba(20, 20, 20, .2)), url('<%=movie.horPoster%>');background-size:cover;background-origin:center;">
+            <h2><%= movie.mName %></h2>
+            <p class="white-text oneLiner"><%= movie.oneLiner %></p>
+          </div> </a>
+  			<% } %>
+      </div>
     <br>
     <h3> LATEST REVIEWS </h3>
     <div class="row">
@@ -151,7 +151,7 @@
       <div class="col s12 m4 l4">
         <div class="card horizontal">
           <div class="card-image">
-            <img src='<%=movie.verPoster%>'>
+            <img src='<%=movie.verPoster%>' height="220px" width="150px">
           </div>
           <div class="card-stacked">
             <div class="card-content">
@@ -171,7 +171,7 @@
       <div class="col s12 m4 l4">
         <div class="card horizontal">
           <div class="card-image">
-            <img src='<%=movie.verPoster%>'>
+            <img src='<%=movie.verPoster%>' height="220px" width="150px">
           </div>
           <div class="card-stacked">
             <div class="card-content">
@@ -254,6 +254,9 @@
           $('.carousel').carousel('next');
           setTimeout(autoplay, 4500);
         }
+        $('.tap-target').click(function(event){
+          event.stopPropagation();
+        });
       });
     </script>
   </body>

@@ -1,7 +1,6 @@
 #home-carousel{
   margin-top: 8vh !important;
-  height: 35vh !important;
-  min-height: 300px!important;
+  min-height: 50vh!important;
 }
 #modal2{
   background: #00ff00 url("../images/cover.jpg") no-repeat no-repeat center;
@@ -16,13 +15,25 @@
   color: black;
   text-align: justify;
 }
-@media only screen and (max-width: 768px) {
-  #modal2 {
-    font-size: 16px;
-  }
-}
 #why{
   max-height: 50vh;
   overflow: auto;
   background-color: transparent;
+}
+.oneLiner {
+  margin-top: 40vh;
+}
+@media only screen and (max-width: 768px) {
+  #modal2 {
+    font-size: 16px;
+  }
+  #home-carousel{
+    min-height: 45vh !important;
+  }
+  .oneLiner{
+    margin-top: 20vh !important;
+    }
+    .carousel.carousel-slider .carousel-item{
+      min-height: 0px;
+    }
 }

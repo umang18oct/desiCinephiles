@@ -13,7 +13,7 @@ nav{
   max-height: 9vh;
 }
 .nav-wrapper ul li a:hover{
-  background-color: white;
+  background-color: white !important;
   color: black ;
 }
 .nav-tabs {
