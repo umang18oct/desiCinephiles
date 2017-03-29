@@ -29,8 +29,8 @@ var nodemailer = require("nodemailer");
 var transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: '', // Your email id
-            pass: '' // Your password
+            user: 'desicinephiles@gmail.com', // Your email id
+            pass: 'S@marth2002' // Your password
         }
     });
 
@@ -60,7 +60,7 @@ router.post('/subscribe', function(req,res,next){
     email: req.body.email
   });
   var mailOptions = {
-    from: '', // sender address
+    from: 'desicinephiles@gmail.com', // sender address
     to: req.body.email, // list of receivers
     subject: 'Successful Subscription :)', // Subject line
     text: 'Greetings from desiCinephiles. . . . . . . . . . ' //, // plaintext body
@@ -276,10 +276,10 @@ router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
 
 router.post('/contact', function(req,res,next){
   var mailOptions = {
-    from: '', // sender address
+    from: 'desicinephiles@gmail.com', // sender address
     to: req.body.email, // list of receivers
-    subject: 'Successful Subscription :)', // Subject line
-    text: 'Greetings from desiCinephiles. . . . . . . . . . ' //, // plaintext body
+    subject: req.body.subject, // Subject line
+    text: "We'll get back to you soon. Thank you for contacting us." //, // plaintext body
     // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
   };
   transporter.sendMail(mailOptions, function(error, info){
@@ -289,7 +289,7 @@ router.post('/contact', function(req,res,next){
     }
     else{
       //console.log('Message sent: ' + info.response);
-          res.redirect('/success');
+          res.redirect('/home');
         };
     });
 });
