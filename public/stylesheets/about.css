@@ -12,3 +12,8 @@
 h5{
   text-align: justify;
 }
+@media only screen and (max-width: 600px) {
+  h5{
+    text-align: left;
+  }
+  }
