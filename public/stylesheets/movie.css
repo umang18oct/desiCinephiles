@@ -12,6 +12,30 @@
     margin: 0;
     padding: 20px 0;
 }
+.movieTabs {
+  margin-top: 10vh;
+  overflow: hidden;
+}
+.tabs{
+  overflow-x: hidden;
+}
+.tab{
+  padding-bottom: 4px;
+}
+.movieElement{
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.movieElement img:hover{
+  transition:all 0.3s ease;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.movieElement img:hover{
+  border: 1px solid blue;
+}
+
 /*@media only screen and (max-width: 768px) {
   #movieTab {
     margin: 0;

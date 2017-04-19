@@ -24,6 +24,7 @@ var Movie = require("../models/movie");
 var Subscriber = require('../models/subscriber');
 var TvShow = require("../models/tvShow");
 var TrendingNews = require("../models/trendingNews");
+var User = require('../models/user');
 var m = require("../middlewares");
 var nodemailer = require("nodemailer");
 var transporter = nodemailer.createTransport({
@@ -45,15 +46,29 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/home', function(req, res, next) {
+router.get('/home',function(req, res, next) {
+  if(!req.isAuthenticated()){
+    return res.redirect("/");
+  }
+  var user = req.user;
   Movie.find().sort({postDate:-1}).limit(6).exec(function(err,movies){
     if(err)throw err;
     res.render('home',{
       movies: movies,
       title: 'Home - desiCinephiles'
-    });
+    },{user:user});
   });
 });
+
+router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+// handle the callback after facebook has authenticated the user
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {
+    successRedirect : '/home',
+    failureRedirect : '/'
+}));
+
 
 router.post('/subscribe', function(req,res,next){
   var subscriber = new Subscriber({
@@ -74,7 +89,7 @@ router.post('/subscribe', function(req,res,next){
     else{
       //console.log('Message sent: ' + info.response);
           res.redirect('/success');
-        };
+        }
     });
 });
 
@@ -154,8 +169,24 @@ function isLoggedIn(req,res,next){
 }
 
 router.get('/admin', m.authenticatedOnly, function(req, res, next) {
-  // console.log("user"+req.user);
-  res.render('admin', { title: 'Admin Panel - desiCinephiles', admin:req.user });
+  console.log("user"+req.user);
+  TvShow.find({author:req.user._id}).exec(function(err,TvShows){
+    if(err)throw err;
+    console.log(TvShows);
+    Movie.find({author:req.user}).exec(function(err,Movies){
+      if(err)throw err;
+      TrendingNews.find({author:req.user}).exec(function(err,TrendingNews){
+        if(err)throw err;
+        res.render('admin', {
+          title: 'Admin Panel - desiCinephiles',
+          admin:req.user,
+          tvshows: TvShows,
+          movies: Movies,
+          trendingnews: TrendingNews
+        });
+      });
+    });
+  });
 });
 
 router.get('/review/:type/:id', function(req, res, next) {
@@ -196,81 +227,195 @@ router.get('/review/:type/:id', function(req, res, next) {
   }
 });
 
-router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
-  //console.log(req.files);
-  req.admin=req.user;
-
-  console.log(req.body.checkType);
-  if(req.body.checkType=="movie"){
-    console.log(req.admin);
-    var movie = new Movie({
-      mName: req.body.mName,
-      director: req.body.director,
-      postDate : new Date(),
-      post: req.body.post,
-      rating: req.body.rating,
-      shouldWatch: req.body.shouldWatch,
-      horPoster: req.files[0].url,
-      verPoster: req.files[1].url,
-      releaseDate: req.body.releaseDate,
-      oneLiner: req.body.oneLiner,
-      trailerLink: req.body.trailerLink,
-      author : req.admin,
-      type: req.body.checkType
-    });
-    movie.save(function(err){
-      if(err){
-        console.log("ERROR : ",err);
-      }else{
-        return res.redirect("/admin");
-      }
+router.get('/admin/edit/:type/:id',m.authenticatedOnly, function(req, res, next) {
+  var type = req.params.type;
+  var id = mongoose.Types.ObjectId(req.params.id);
+  // console.log("type:"+type);
+  // console.log("id:"+id);
+  if(type=="movie"){
+    Movie.findOne({_id:id}).populate("author").exec(function(err, movie){
+      if(err)throw err;
+      //console.log(movie);
+      //console.log(movie.author);
+      res.render('update', {
+        title: 'Edit Post - desiCinephiles',
+        review: movie
+      });
     });
   }
-  else if(req.body.checkType=="tvshow"){
-    var tvshow = new TvShow({
-      tName: req.body.tName,
-      director: req.body.director,
-      postDate : new Date(),
-      post: req.body.post,
-      rating: req.body.rating,
-      shouldWatch: req.body.shouldWatch,
-      horPoster: req.files[0].url,
-      verPoster: req.files[1].url,
-      oneLiner: req.body.oneLiner,
-      author : req.admin,
-      type: req.body.checkType
+  else if(type=="tvshow"){
+    TvShow.findOne({_id: id}).populate("author").exec(function(err, tvShow){
+      if(err)throw err;
+      res.render('update', {
+        title: 'Edit Post - desiCinephiles',
+        review: tvShow
+      });
     });
-    tvshow.save(function(err){
-      if(err){
-        console.log("ERROR : ",err);
-      }else{
-        return res.redirect("/admin");
-      }
+  }
+  else if(type=="trending"){
+    TrendingNews.findOne({_id: id}).populate("author").exec(function(err, trendingNews){
+      res.render('update', {
+        title: 'Edit Post - desiCinephiles',
+        review: trendingNews
+      });
     });
   }
   else{
-    var trending = new TrendingNews({
-      mName: req.body.tnName,
-      director: req.body.director,
-      postDate : new Date(),
-      post: req.body.post,
-      rating: req.body.rating,
-      horPoster: req.files[0].url,
-      verPoster: req.files[1].url,
-      releaseDate: req.body.releaseDate,
-      oneLiner: req.body.oneLiner,
-      trailerLink: req.body.trailerLink,
-      author : req.admin,
-      type: req.body.checkType,
-      shouldWatch: req.body.shouldWatch,
-    });
-    trending.save(function(err){
-      if(err){
-        console.log("ERROR : ",err);
-      }else{
-        return res.redirect("/admin");
-      }
-    });
+    res.render('error');
+  }
+});
+
+// router.post('/admin/edit')
+
+router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
+  //console.log(req.files);
+  req.admin=req.user;
+  var postidd = req.body.postid;
+  //console.log(req.body.checkType);
+  if(req.body.checkType=="movie"){
+    if(req.body.edit=="false")
+    //console.log(req.admin);
+    { var movie = new Movie({
+        mName: req.body.mName,
+        director: req.body.director,
+        postDate : new Date(),
+        post: req.body.post,
+        rating: req.body.rating,
+        shouldWatch: req.body.shouldWatch,
+        horPoster: req.files[0].url,
+        verPoster: req.files[1].url,
+        releaseDate: req.body.releaseDate,
+        oneLiner: req.body.oneLiner,
+        trailerLink: req.body.trailerLink,
+        author : req.admin,
+        type: req.body.checkType
+      });
+      movie.save(function(err){
+        if(err){
+          console.log("ERROR : ",err);
+        }else{
+          return res.redirect("/admin");
+        }
+      });
+    }
+    else{
+      Movie.find({_id:postidd}).populate("author").exec(function(err,movie){
+        console.log(movie);
+        movie.mName= req.body.mName;
+        movie.director= req.body.director;
+        movie.postDate= new Date();
+        movie.post= req.body.post;
+        movie.rating= req.body.rating;
+        movie.shouldWatch= req.body.shouldWatch;
+        if(req.files[0].url){
+        movie.horPoster= req.files[0].url;
+        }
+        if(req.files[1].url){
+        movie.horPoster= req.files[1].url;
+        }
+        movie.releaseDate= req.body.releaseDate;
+        movie.oneLiner= req.body.oneLiner;
+        movie.trailerLink= req.body.trailerLink;
+        // movie.save(function(err){
+        //   return res.send("Success");
+        // });
+      });
+    }
+  }
+  else if(req.body.checkType=="tvshow"){
+    if(req.body.edit="false"){
+      var tvshow = new TvShow({
+        tName: req.body.tName,
+        director: req.body.director,
+        postDate : new Date(),
+        post: req.body.post,
+        rating: req.body.rating,
+        shouldWatch: req.body.shouldWatch,
+        horPoster: req.files[0].url,
+        verPoster: req.files[1].url,
+        oneLiner: req.body.oneLiner,
+        author : req.admin,
+        type: req.body.checkType
+      });
+      tvshow.save(function(err){
+        if(err){
+          console.log("ERROR : ",err);
+        }else{
+          return res.redirect("/admin");
+        }
+      });
+    }
+    else{
+      TvShow.find({_id:postidd}).populate("author").exec(function(err,movie){
+        movie.tName= req.body.tName;
+        movie.director= req.body.director;
+        movie.postDate= new Date();
+        movie.post= req.body.post;
+        movie.rating= req.body.rating;
+        movie.shouldWatch= req.body.shouldWatch;
+        if(req.files[0].url){
+        movie.horPoster= req.files[0].url;
+        }
+        if(req.files[1].url){
+        movie.horPoster= req.files[1].url;
+        }
+        movie.releaseDate= req.body.releaseDate;
+        movie.oneLiner= req.body.oneLiner;
+        movie.save(function(err){
+          return res.send("Success");
+        });
+      });
+    }
+  }
+  else{
+    if(req.body.edit=="false"){
+      var trending = new TrendingNews({
+        mName: req.body.tnName,
+        director: req.body.director,
+        postDate : new Date(),
+        post: req.body.post,
+        rating: req.body.rating,
+        horPoster: req.files[0].url,
+        verPoster: req.files[1].url,
+        releaseDate: req.body.releaseDate,
+        oneLiner: req.body.oneLiner,
+        trailerLink: req.body.trailerLink,
+        author : req.admin,
+        type: req.body.checkType,
+        shouldWatch: req.body.shouldWatch,
+      });
+      trending.save(function(err){
+        if(err){
+          console.log("ERROR : ",err);
+        }else{
+          return res.redirect("/admin");
+        }
+      });
+    }
+    else{
+      TrendingNews.findOne({_id:postidd}).populate("author").exec(function(err,movie){
+        if(err)throw err;
+        movie.mName= req.body.mName;
+        movie.director= req.body.director;
+        movie.postDate= new Date();
+        movie.post= req.body.post;
+        movie.rating= req.body.rating;
+        movie.shouldWatch= req.body.shouldWatch;
+        if(req.files[0]){
+        movie.horPoster= req.files[0].url;
+        }
+        if(req.files[1]){
+        movie.horPoster= req.files[1].url;
+        }
+        movie.releaseDate= req.body.releaseDate;
+        movie.trailerLink= req.body.trailerLink;
+        movie.oneLiner= req.body.oneLiner;
+        console.log(movie);
+        movie.save(function(err){
+          return res.redirect("/admin");
+        });
+      });
+    }
   }
 });
 

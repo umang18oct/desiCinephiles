@@ -14,6 +14,7 @@ var TvShow = new Schema({
     verPoster: String,
     lastAiredEpisodeDate: {type: Date},
     oneLiner: String,
-    type: String
+    type: String,
+    edit: String
 });
 module.exports = mongoose.model('TvShow', TvShow);

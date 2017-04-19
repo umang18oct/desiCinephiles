@@ -28,6 +28,7 @@
           <li class="nav-tabs"><a href="/tvshows"><b>TV SHOWS</b></a></li>
           <li class="nav-tabs"><a class="modal-trigger waves-effect waves-light" href="#modal1"><b>CONTACT US</b></a></li>
           <li class="nav-tabs"><a onclick="$('.tap-target').tapTarget('open')"><b>SUBSCRIBE!</b></a></li>
+          <li class="nav-tabs"><a class="modal-trigger waves-effect waves-light" href="#signup"><b>SIGN-UP</b></a></li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
           <li class="nav-tabs active"><a href="/home"><b>HOME</b></a></li>
@@ -36,6 +37,7 @@
           <li class="nav-tabs"><a href="/tvshows"><b>TV SHOWS</b></a></li>
           <li class="nav-tabs"><a class="modal-trigger waves-effect waves-light" href="#modal1"><b>CONTACT US</b></a></li>
           <li class="nav-tabs"><a onclick="$('.tap-target').tapTarget('open')"><b>SUBSCRIBE!</b></a></li>
+          <li class="nav-tabs"><a class="modal-trigger waves-effect waves-light" href="#signup"><b>SIGN-UP</b></a></li>
         </ul>
       </div>
     </nav>
@@ -78,6 +80,15 @@
          <br><br>
          We might fail in our attempts but we promise to keep trying. We are the DesiCinephiles. </p>
        </div>
+    </div>
+  </div>
+  <div id="signup" class="modal">
+    <div class="modal-content center">
+      <h4> SIGN-UP </h4>
+      <button class="loginBtn loginBtn--facebook"><a href="/auth/facebook">Login with Facebook</a></button>
+      <button class="loginBtn loginBtn--google">
+        Login with Google
+      </button>
     </div>
   </div>
   <div id="modal1" class="modal modal-fixed-footer">
@@ -247,6 +258,7 @@
         });
         $('.tap-target').tapTarget('close');
         $('#modal1').modal();
+        $('#signup').modal();
         $('.carousel.carousel-slider').carousel({fullWidth: true,duration: 300});
         autoplay();
         function autoplay() {

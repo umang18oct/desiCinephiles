@@ -16,6 +16,7 @@ var Movie = new Schema({
     releaseDate: {type: Date},
     oneLiner: String,
     trailerLink: String,
-    type: String
+    type: String,
+    edit: String
 });
 module.exports = mongoose.model('Movie', Movie);

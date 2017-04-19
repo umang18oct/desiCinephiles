@@ -2,8 +2,22 @@
   height: 400px!important;
   min-height: 350px!important;
   width: 100%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  z-index: -2;
+  position: relative;
 }
 .rating{
   padding: 10px;
+}
+body{
+  background-color: #14181c;
+  color: #a5d2fb;
+}
+.exContainer{
+  width: 85vw;
+  margin-left: 7.5vw;
+  text-align: center;
+  box-shadow: inset 0px 0px 10px 10px rgba(20,24,28,0.9);
+}
+.container{
+  width: 80vw;
 }

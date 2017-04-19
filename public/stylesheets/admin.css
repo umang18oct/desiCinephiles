@@ -16,3 +16,10 @@ label, input{
 #adminName{
   float: right;
 }
+table{
+  margin: 5px;
+  border: 2px solid black;
+}
+tr{
+  border: 1px solid blue;
+}

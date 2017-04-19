@@ -14,6 +14,7 @@ var TrendingNews = new Schema({
     releaseDate: {type: Date},
     oneLiner: String,
     type: String,
-    shouldWatch: String
+    shouldWatch: String,
+    edit: String
 });
 module.exports = mongoose.model('TrendingNews', TrendingNews);

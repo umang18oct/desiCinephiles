@@ -6,7 +6,19 @@ var Admin = new Schema({
     lname: String,
     username: String,
     email: String,
-    password: String
+    password: String,
+    // movie: {
+    //     type :mongoose.Schema.ObjectId,
+    //     ref : "Movie"
+    // },
+    // trendingNews: {
+    //     type :mongoose.Schema.ObjectId,
+    //     ref : "TrendingNews"
+    // },
+    // tvShow: {
+    //     type :mongoose.Schema.ObjectId,
+    //     ref : "TvShow"
+    // }
 });
 Admin.plugin(passportLocalMongoose);
 module.exports = mongoose.model('Admin', Admin);
