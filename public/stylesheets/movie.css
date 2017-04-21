@@ -41,3 +41,19 @@
     margin: 0;
   }
 }*/
+.tabs .indicator {
+    margin-top: 8px;
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: #039be5;
+}
+.tabs .tab a:hover, .tabs .tab a.active {
+    background-color: rgb(25, 23, 23);
+    color: #039be5;
+}
+.tabs .tab a {
+    color: black;
+    background-color: #039be5;
+
+}

@@ -47,16 +47,17 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/home',function(req, res, next) {
-  if(!req.isAuthenticated()){
-    return res.redirect("/");
-  }
-  var user = req.user;
+  // if(!req.isAuthenticated()){
+  //   return res.redirect("/");
+  // }
+  //var user = req.user;
   Movie.find().sort({postDate:-1}).limit(6).exec(function(err,movies){
     if(err)throw err;
     res.render('home',{
       movies: movies,
       title: 'Home - desiCinephiles'
-    },{user:user});
+    });
+    // },{user:user});
   });
 });
 
