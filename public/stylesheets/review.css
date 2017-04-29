@@ -17,6 +17,8 @@ body{
   margin-left: 12.5vw;
   text-align: center;
   box-shadow: inset 0px 0px 20px 20px rgba(20,24,28,0.9);
+  min-height: 400px;
+  min-width: 80%;
 }
 .container{
   width: 70vw;
