@@ -312,7 +312,7 @@ router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
         movie.horPoster= req.files[0].url;
         }
         if(req.files[1]){
-        movie.horPoster= req.files[1].url;
+        movie.verPoster= req.files[1].url;
         }
         movie.releaseDate= req.body.releaseDate;
         movie.oneLiner= req.body.oneLiner;
@@ -358,7 +358,7 @@ router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
         movie.horPoster= req.files[0].url;
         }
         if(req.files[1]){
-        movie.horPoster= req.files[1].url;
+        movie.verPoster= req.files[1].url;
         }
         movie.releaseDate= req.body.releaseDate;
         movie.oneLiner= req.body.oneLiner;
@@ -407,7 +407,7 @@ router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
         movie.horPoster= req.files[0].url;
         }
         if(req.files[1]){
-        movie.horPoster= req.files[1].url;
+        movie.verPoster= req.files[1].url;
         }
         movie.releaseDate= req.body.releaseDate;
         movie.trailerLink= req.body.trailerLink;
