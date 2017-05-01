@@ -300,7 +300,7 @@ router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
       });
     }
     else{
-      Movie.find({_id:postidd}).populate("author").exec(function(err,movie){
+      Movie.findOne({_id:postidd}).populate("author").exec(function(err,movie){
         console.log(movie);
         movie.mName= req.body.mName;
         movie.director= req.body.director;
@@ -308,18 +308,18 @@ router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
         movie.post= req.body.post;
         movie.rating= req.body.rating;
         movie.shouldWatch= req.body.shouldWatch;
-        if(req.files[0].url){
+        if(req.files[0]){
         movie.horPoster= req.files[0].url;
         }
-        if(req.files[1].url){
+        if(req.files[1]){
         movie.horPoster= req.files[1].url;
         }
         movie.releaseDate= req.body.releaseDate;
         movie.oneLiner= req.body.oneLiner;
         movie.trailerLink= req.body.trailerLink;
-        // movie.save(function(err){
-        //   return res.send("Success");
-        // });
+        movie.save(function(err){
+          return res.redirect("/admin");
+        });
       });
     }
   }
@@ -347,21 +347,22 @@ router.post('/admin', upload.any(), m.authenticatedOnly, function(req, res) {
       });
     }
     else{
-      TvShow.find({_id:postidd}).populate("author").exec(function(err,movie){
+      TvShow.findOne({_id:postidd}).populate("author").exec(function(err,movie){
         movie.tName= req.body.tName;
         movie.director= req.body.director;
         movie.postDate= new Date();
         movie.post= req.body.post;
         movie.rating= req.body.rating;
         movie.shouldWatch= req.body.shouldWatch;
-        if(req.files[0].url){
+        if(req.files[0]){
         movie.horPoster= req.files[0].url;
         }
-        if(req.files[1].url){
+        if(req.files[1]){
         movie.horPoster= req.files[1].url;
         }
         movie.releaseDate= req.body.releaseDate;
         movie.oneLiner= req.body.oneLiner;
+        console.log(movie);
         movie.save(function(err){
           return res.send("Success");
         });
