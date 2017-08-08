@@ -1,31 +1,22 @@
 #home-carousel{
   margin-top: 0vh !important;
-  min-height: 80vh!important;
+  margin-left: 0cm !important;
+  min-height: 100vh!important;
 }
-.white-text oneLiner{
-  position: relative;
 
-}
-#modal2{
-  background: #00ff00 url("../images/cover.jpg") no-repeat no-repeat center;
-  z-index: 200;
-  background-size: cover;
-  background-color: rgba(0, 0, 0, 0.9);
-  width: 75%;
-  height: 85%;
-  max-height: 100%;
-  font-family: 'Ranga', cursive;
-  font-size: 22px;
-  color: black;
-  text-align: justify;
-}
+
 #why{
   max-height: 50vh;
   overflow: auto;
   background-color: transparent;
 }
 .oneLiner {
-  margin-top: 40vh;
+  margin-top: 80vh;
+  z-index: 100;
+
+  color: #FFD700;
+  font-size: 24px;
+  font-weight: bold;
 }
 @media only screen and (max-width: 768px) {
   #modal2 {

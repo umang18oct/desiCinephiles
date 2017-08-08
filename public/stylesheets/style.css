@@ -3,10 +3,6 @@ body {
   overflow-x: hidden;
   background:grey;
 }
-.white-text oneLiner{
-  position: absolute!important;
-    bottom: 8px!important;
-    left: 16px!important;
 
 
 
@@ -110,6 +106,7 @@ ul {
    padding: 0;
 }
 #sticky-social {
+  z-index: 1;
    left: 0;
    position: fixed;
    top: 150px;
@@ -133,6 +130,7 @@ ul {
    width:120px;
 }
 #sticky-social a:hover span {
+  z-index: 1;
    left: 100%;
 }
 #sticky-social a[class*="facebook"],
