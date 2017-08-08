@@ -62,26 +62,7 @@
       </div>
     </div>
   <!-- Modal Structure -->
-  <div id="modal2" class="modal">
-    <div class="modal-content cover">
-      <br>
-      <br>
-      <div id="why" class="scrollbar style-3">
-      <p>At first glance, it would seem like we aren’t doing anything new. This could be another
-        site giving you our weekly dose of movie reviews which could help you decide what would
-        you spend your weekend watching. This website would definitely do that, provide an easily
-        digestible meal which would satiate those who see films and television as a source of
-        entertainment, which they essentially are. But rather than being a one sided exercise,
-        what we want to do here is to establish a discourse, with those who live and breath,
-        cinema and television. It would be an attempt to engage like minded people in a
-        discussion which works on one assumption, that cinema is a form of art, those which draw
-        inspiration from all other, and thus they warrant a discussion which is, for the lack of
-        a better word,  profound.
-         <br><br>
-         We might fail in our attempts but we promise to keep trying. We are the DesiCinephiles. </p>
-       </div>
-    </div>
-  </div>
+
   <div id="signup" class="modal">
     <div class="modal-content center">
       <h4> SIGN-UP </h4>
@@ -236,26 +217,7 @@
     <script>
       $(document).ready(function(){
         $(".button-collapse").sideNav();
-        setTimeout(function(){
-          $('#modal2').modal('open');
-          }, 2000);
-        $('#modal2').modal({
-          dismissible: true, // Modal can be dismissed by clicking outside of the modal
-          opacity: .2, // Opacity of modal background
-          inDuration: 300, // Transition in duration
-          outDuration: 200, // Transition out duration
-          ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-            $('#main').css('-webkit-filter','blur(10px)');
-            $('#main').css('-moz-filter','blur(10px)');
-            $('#main').css('filter','blur(10px)');
-            // $('body').css('background-color', 'cyan');
-          },
-          complete: function() {
-            $('#main').css('-webkit-filter','blur(0px)');
-            $('#main').css('-moz-filter','blur(0px)');
-            $('#main').css('filter','blur(0px)');
-          } // Callback for Modal close
-        });
+        
         $('.tap-target').tapTarget('close');
         $('#modal1').modal();
         $('#signup').modal();

@@ -130,6 +130,8 @@
       <% for(var i=0;i<5;i++){var movie = movies[i];if(!movie)continue; %>
         <a href="/review/<%= movie.type %>/<%= movie.id %>"><div class="carousel-item red white-text" style="background: linear-gradient(rgba(20, 20, 20, .2),rgba(20, 20, 20, .2)), url('<%=movie.horPoster%>');background-size:cover;background-origin:center;">
           <h2><%= movie.mName %></h2>
+        <br>
+        <br><br>
           <p class="white-text oneLiner"><%= movie.oneLiner %></p>
         </div> </a>
 			<% } %>
@@ -141,7 +143,7 @@
       <div class="col s12 m4 l4">
         <div class="card horizontal">
           <div class="card-image">
-            <img src='<%=movie.verPoster%>' height="220px" width="150px">
+            <img src='<%=movie.verPoster%>' height="220px" width="220px">
           </div>
           <div class="card-stacked">
             <div class="card-content">
@@ -161,7 +163,7 @@
       <div class="col s12 m4 l4">
         <div class="card horizontal">
           <div class="card-image">
-            <img src='<%=movie.verPoster%>' height="220px" width="150px">
+            <img src='<%=movie.verPoster%>' height="220px" width="300px">
           </div>
           <div class="card-stacked">
             <div class="card-content">
